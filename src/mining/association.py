@@ -108,7 +108,12 @@ def generate_rules(frequent: dict[Itemset, float], min_confidence: float,
                 })
     if not rows:
         return pd.DataFrame(columns=["antecedent", "consequent", "support", "confidence", "lift"])
-    return pd.DataFrame(rows).sort_values(["lift", "confidence"], ascending=False).reset_index(drop=True)
+    # Antecedent/consequent are included in the sort key so that ties — which are
+    # common on categorical data — break deterministically across runs.
+    return (pd.DataFrame(rows)
+            .sort_values(["lift", "confidence", "support", "antecedent", "consequent"],
+                         ascending=[False, False, False, True, True])
+            .reset_index(drop=True))
 
 
 # ------------------------------------------------------- transaction building

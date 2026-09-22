@@ -1,6 +1,6 @@
 # Traffic Incident & Congestion Intelligence — Findings
 
-_Generated 2026-09-22 12:08 from the automated pipeline._
+_Generated 2026-09-22 12:15 from the automated pipeline._
 
 ## 1. Dataset and warehouse
 
@@ -160,10 +160,10 @@ k-Means selected **k = 2** by silhouette (0.371); DBSCAN found 7 dense spatial c
 | TIME=Night, VEHICLES=2-3            | CONGESTION=Free flow          |    0.064  |       0.7254 | 4.6283 |     0.0502 |
 | TIME=Night                          | CONGESTION=Free flow, PEAK=No |    0.1102 |       0.718  | 4.6221 |     0.0864 |
 | CONGESTION=Free flow, PEAK=No       | TIME=Night                    |    0.1102 |       0.7097 | 4.6221 |     0.0864 |
-| TIME=Night                          | CONGESTION=Free flow          |    0.1102 |       0.718  | 4.5811 |     0.0862 |
 | PEAK=No, TIME=Night                 | CONGESTION=Free flow          |    0.1102 |       0.718  | 4.5811 |     0.0862 |
-| CONGESTION=Free flow                | TIME=Night                    |    0.1102 |       0.7034 | 4.5811 |     0.0862 |
+| TIME=Night                          | CONGESTION=Free flow          |    0.1102 |       0.718  | 4.5811 |     0.0862 |
 | CONGESTION=Free flow                | PEAK=No, TIME=Night           |    0.1102 |       0.7034 | 4.5811 |     0.0862 |
+| CONGESTION=Free flow                | TIME=Night                    |    0.1102 |       0.7034 | 4.5811 |     0.0862 |
 | CONGESTION=Free flow, VEHICLES=2-3  | TIME=Night                    |    0.064  |       0.6988 | 4.5514 |     0.0499 |
 | CONGESTION=Free flow, WEATHER=Clear | TIME=Night                    |    0.0584 |       0.6885 | 4.4842 |     0.0454 |
 

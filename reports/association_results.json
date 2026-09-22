@@ -74,16 +74,6 @@
       "antecedent_size": 2
     },
     {
-      "antecedent": "TIME=Night",
-      "consequent": "CONGESTION=Free flow",
-      "support": 0.1102,
-      "confidence": 0.718,
-      "lift": 4.5811,
-      "leverage": 0.0862,
-      "conviction": 2.9905,
-      "antecedent_size": 1
-    },
-    {
       "antecedent": "PEAK=No, TIME=Night",
       "consequent": "CONGESTION=Free flow",
       "support": 0.1102,
@@ -94,8 +84,18 @@
       "antecedent_size": 2
     },
     {
+      "antecedent": "TIME=Night",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.1102,
+      "confidence": 0.718,
+      "lift": 4.5811,
+      "leverage": 0.0862,
+      "conviction": 2.9905,
+      "antecedent_size": 1
+    },
+    {
       "antecedent": "CONGESTION=Free flow",
-      "consequent": "TIME=Night",
+      "consequent": "PEAK=No, TIME=Night",
       "support": 0.1102,
       "confidence": 0.7034,
       "lift": 4.5811,
@@ -105,7 +105,7 @@
     },
     {
       "antecedent": "CONGESTION=Free flow",
-      "consequent": "PEAK=No, TIME=Night",
+      "consequent": "TIME=Night",
       "support": 0.1102,
       "confidence": 0.7034,
       "lift": 4.5811,

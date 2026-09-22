@@ -1,4 +1,7 @@
 # Theme for the presentation dashboard — professional dark palette.
+[client]
+toolbarMode = "minimal"
+
 [theme]
 base = "dark"
 primaryColor = "#60A5FA"

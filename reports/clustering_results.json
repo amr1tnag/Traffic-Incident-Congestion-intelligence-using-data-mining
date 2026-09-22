@@ -1,0 +1,185 @@
+{
+  "k": 2,
+  "k_diagnostics": [
+    {
+      "k": 2,
+      "inertia": 261.496,
+      "silhouette": 0.3708,
+      "davies_bouldin": 1.028,
+      "calinski_harabasz": 48.46
+    },
+    {
+      "k": 3,
+      "inertia": 209.47,
+      "silhouette": 0.2645,
+      "davies_bouldin": 1.3016,
+      "calinski_harabasz": 36.81
+    },
+    {
+      "k": 4,
+      "inertia": 180.774,
+      "silhouette": 0.2364,
+      "davies_bouldin": 1.2954,
+      "calinski_harabasz": 30.9
+    },
+    {
+      "k": 5,
+      "inertia": 160.369,
+      "silhouette": 0.219,
+      "davies_bouldin": 1.3474,
+      "calinski_harabasz": 27.41
+    },
+    {
+      "k": 6,
+      "inertia": 144.905,
+      "silhouette": 0.214,
+      "davies_bouldin": 1.3224,
+      "calinski_harabasz": 24.98
+    },
+    {
+      "k": 7,
+      "inertia": 133.577,
+      "silhouette": 0.2027,
+      "davies_bouldin": 1.2982,
+      "calinski_harabasz": 22.91
+    },
+    {
+      "k": 8,
+      "inertia": 120.785,
+      "silhouette": 0.2108,
+      "davies_bouldin": 1.2399,
+      "calinski_harabasz": 22.09
+    }
+  ],
+  "silhouette": 0.3708,
+  "cluster_summary": [
+    {
+      "cluster": 0,
+      "avg_congestion": 0.4329,
+      "peak_congestion": 0.8395,
+      "peak_offpeak_ratio": 1.9133,
+      "weekend_ratio": 0.7226,
+      "incident_rate_per_1k_h": 25.72,
+      "wet_penalty": 0.0812,
+      "avg_speed_ratio": 0.6124,
+      "pct_congested_hours": 26.3004,
+      "segments": 26,
+      "label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "cluster": 1,
+      "avg_congestion": 0.3003,
+      "peak_congestion": 0.5744,
+      "peak_offpeak_ratio": 1.8997,
+      "weekend_ratio": 0.7285,
+      "incident_rate_per_1k_h": 21.3538,
+      "wet_penalty": 0.0816,
+      "avg_speed_ratio": 0.7155,
+      "pct_congested_hours": 4.4088,
+      "segments": 34,
+      "label": "Stable low-stress segment"
+    }
+  ],
+  "cluster_labels": {
+    "0": "Chronic peak-hour bottleneck",
+    "1": "Stable low-stress segment"
+  },
+  "dbscan": {
+    "clusters": 7,
+    "noise_segments": 24,
+    "eps": 0.65,
+    "min_samples": 3
+  },
+  "top_hotspots": [
+    {
+      "segment_id": "SEG027",
+      "zone": "North",
+      "road_type": "Arterial",
+      "avg_congestion": 0.4927,
+      "peak_congestion": 0.9854,
+      "incident_rate_per_1k_h": 34.132,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG022",
+      "zone": "Central",
+      "road_type": "Arterial",
+      "avg_congestion": 0.4914,
+      "peak_congestion": 0.969,
+      "incident_rate_per_1k_h": 33.904,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG044",
+      "zone": "Central",
+      "road_type": "Arterial",
+      "avg_congestion": 0.4893,
+      "peak_congestion": 0.981,
+      "incident_rate_per_1k_h": 37.443,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG029",
+      "zone": "Central",
+      "road_type": "Arterial",
+      "avg_congestion": 0.489,
+      "peak_congestion": 0.9551,
+      "incident_rate_per_1k_h": 30.251,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG030",
+      "zone": "North",
+      "road_type": "Collector",
+      "avg_congestion": 0.4817,
+      "peak_congestion": 0.936,
+      "incident_rate_per_1k_h": 24.315,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG046",
+      "zone": "East",
+      "road_type": "Residential",
+      "avg_congestion": 0.4795,
+      "peak_congestion": 0.9197,
+      "incident_rate_per_1k_h": 12.9,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG002",
+      "zone": "Central",
+      "road_type": "Arterial",
+      "avg_congestion": 0.4716,
+      "peak_congestion": 0.9134,
+      "incident_rate_per_1k_h": 31.735,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG034",
+      "zone": "East",
+      "road_type": "Arterial",
+      "avg_congestion": 0.4599,
+      "peak_congestion": 0.8994,
+      "incident_rate_per_1k_h": 33.79,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG040",
+      "zone": "South",
+      "road_type": "Collector",
+      "avg_congestion": 0.4561,
+      "peak_congestion": 0.8785,
+      "incident_rate_per_1k_h": 20.662,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    },
+    {
+      "segment_id": "SEG014",
+      "zone": "South",
+      "road_type": "Residential",
+      "avg_congestion": 0.4514,
+      "peak_congestion": 0.8587,
+      "incident_rate_per_1k_h": 13.584,
+      "cluster_label": "Chronic peak-hour bottleneck"
+    }
+  ]
+}

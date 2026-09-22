@@ -1,0 +1,59 @@
+{
+  "horizon_hours": 168,
+  "train_rows": 8424,
+  "test_rows": 168,
+  "features": [
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_24",
+    "lag_168",
+    "roll_mean_3",
+    "roll_mean_24",
+    "roll_std_24",
+    "incidents_lag_1",
+    "wet_lag_1",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "month",
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos"
+  ],
+  "metrics": {
+    "persistence_baseline": {
+      "mae": 0.06881,
+      "rmse": 0.08696,
+      "mape_pct": 24.24,
+      "r2": 0.8023
+    },
+    "seasonal_naive_baseline": {
+      "mae": 0.04252,
+      "rmse": 0.06162,
+      "mape_pct": 20.538,
+      "r2": 0.9007
+    },
+    "ridge": {
+      "mae": 0.03071,
+      "rmse": 0.04052,
+      "mape_pct": 12.972,
+      "r2": 0.9571
+    },
+    "random_forest": {
+      "mae": 0.02257,
+      "rmse": 0.03176,
+      "mape_pct": 8.776,
+      "r2": 0.9736
+    },
+    "gradient_boosting": {
+      "mae": 0.02279,
+      "rmse": 0.03179,
+      "mape_pct": 8.822,
+      "r2": 0.9736
+    }
+  },
+  "best_model": "random_forest",
+  "improvement_over_persistence_pct": 67.2
+}

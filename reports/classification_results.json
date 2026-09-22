@@ -1,0 +1,368 @@
+{
+  "models": {
+    "decision_tree": {
+      "cv_accuracy_mean": 0.7052,
+      "cv_accuracy_std": 0.0172,
+      "test_accuracy": 0.7133,
+      "macro_precision": 0.7202,
+      "macro_recall": 0.744,
+      "macro_f1": 0.7295,
+      "confusion_matrix": [
+        [
+          559,
+          132,
+          17,
+          0
+        ],
+        [
+          258,
+          648,
+          179,
+          21
+        ],
+        [
+          3,
+          142,
+          681,
+          68
+        ],
+        [
+          0,
+          12,
+          44,
+          291
+        ]
+      ],
+      "per_class": {
+        "1": {
+          "precision": 0.6817073170731708,
+          "recall": 0.78954802259887,
+          "f1-score": 0.731675392670157,
+          "support": 708.0
+        },
+        "2": {
+          "precision": 0.6937901498929336,
+          "recall": 0.5858951175406871,
+          "f1-score": 0.6352941176470588,
+          "support": 1106.0
+        },
+        "3": {
+          "precision": 0.739413680781759,
+          "recall": 0.761744966442953,
+          "f1-score": 0.7504132231404959,
+          "support": 894.0
+        },
+        "4": {
+          "precision": 0.7657894736842106,
+          "recall": 0.8386167146974063,
+          "f1-score": 0.8005502063273727,
+          "support": 347.0
+        },
+        "accuracy": 0.7132569558101473,
+        "macro avg": {
+          "precision": 0.7201751553580185,
+          "recall": 0.743951205319979,
+          "f1-score": 0.7294832349462711,
+          "support": 3055.0
+        },
+        "weighted avg": {
+          "precision": 0.7125189735701156,
+          "recall": 0.7132569558101473,
+          "f1-score": 0.7100889738825925,
+          "support": 3055.0
+        }
+      }
+    },
+    "random_forest": {
+      "cv_accuracy_mean": 0.7428,
+      "cv_accuracy_std": 0.0106,
+      "test_accuracy": 0.7489,
+      "macro_precision": 0.7684,
+      "macro_recall": 0.7605,
+      "macro_f1": 0.7642,
+      "confusion_matrix": [
+        [
+          544,
+          162,
+          2,
+          0
+        ],
+        [
+          179,
+          781,
+          144,
+          2
+        ],
+        [
+          3,
+          161,
+          685,
+          45
+        ],
+        [
+          0,
+          2,
+          67,
+          278
+        ]
+      ],
+      "per_class": {
+        "1": {
+          "precision": 0.7493112947658402,
+          "recall": 0.768361581920904,
+          "f1-score": 0.7587168758716876,
+          "support": 708.0
+        },
+        "2": {
+          "precision": 0.7061482820976492,
+          "recall": 0.7061482820976492,
+          "f1-score": 0.7061482820976492,
+          "support": 1106.0
+        },
+        "3": {
+          "precision": 0.7628062360801782,
+          "recall": 0.7662192393736018,
+          "f1-score": 0.7645089285714286,
+          "support": 894.0
+        },
+        "4": {
+          "precision": 0.8553846153846154,
+          "recall": 0.8011527377521613,
+          "f1-score": 0.8273809523809523,
+          "support": 347.0
+        },
+        "accuracy": 0.7489361702127659,
+        "macro avg": {
+          "precision": 0.7684126070820707,
+          "recall": 0.7604704602860791,
+          "f1-score": 0.7641887597304295,
+          "support": 3055.0
+        },
+        "weighted avg": {
+          "precision": 0.7496823676884962,
+          "recall": 0.7489361702127659,
+          "f1-score": 0.7491796139889371,
+          "support": 3055.0
+        }
+      }
+    },
+    "naive_bayes": {
+      "cv_accuracy_mean": 0.5395,
+      "cv_accuracy_std": 0.0052,
+      "test_accuracy": 0.5339,
+      "macro_precision": 0.53,
+      "macro_recall": 0.5851,
+      "macro_f1": 0.5388,
+      "confusion_matrix": [
+        [
+          534,
+          149,
+          24,
+          1
+        ],
+        [
+          234,
+          456,
+          354,
+          62
+        ],
+        [
+          14,
+          153,
+          382,
+          345
+        ],
+        [
+          0,
+          13,
+          75,
+          259
+        ]
+      ],
+      "per_class": {
+        "1": {
+          "precision": 0.6828644501278772,
+          "recall": 0.7542372881355932,
+          "f1-score": 0.7167785234899329,
+          "support": 708.0
+        },
+        "2": {
+          "precision": 0.5914396887159533,
+          "recall": 0.41229656419529837,
+          "f1-score": 0.48588172615876396,
+          "support": 1106.0
+        },
+        "3": {
+          "precision": 0.45748502994011975,
+          "recall": 0.4272930648769575,
+          "f1-score": 0.4418739155581261,
+          "support": 894.0
+        },
+        "4": {
+          "precision": 0.38830584707646176,
+          "recall": 0.7463976945244957,
+          "f1-score": 0.5108481262327417,
+          "support": 347.0
+        },
+        "accuracy": 0.5338788870703765,
+        "macro avg": {
+          "precision": 0.530023753965103,
+          "recall": 0.5850561529330862,
+          "f1-score": 0.5388455728598912,
+          "support": 3055.0
+        },
+        "weighted avg": {
+          "precision": 0.5503548517552802,
+          "recall": 0.5338788870703765,
+          "f1-score": 0.529349906407264,
+          "support": 3055.0
+        }
+      }
+    },
+    "logistic_regression": {
+      "cv_accuracy_mean": 0.666,
+      "cv_accuracy_std": 0.0095,
+      "test_accuracy": 0.6691,
+      "macro_precision": 0.66,
+      "macro_recall": 0.6926,
+      "macro_f1": 0.6725,
+      "confusion_matrix": [
+        [
+          571,
+          135,
+          2,
+          0
+        ],
+        [
+          195,
+          663,
+          241,
+          7
+        ],
+        [
+          2,
+          161,
+          550,
+          181
+        ],
+        [
+          0,
+          3,
+          84,
+          260
+        ]
+      ],
+      "per_class": {
+        "1": {
+          "precision": 0.7434895833333334,
+          "recall": 0.806497175141243,
+          "f1-score": 0.7737127371273713,
+          "support": 708.0
+        },
+        "2": {
+          "precision": 0.6891891891891891,
+          "recall": 0.5994575045207957,
+          "f1-score": 0.6411992263056093,
+          "support": 1106.0
+        },
+        "3": {
+          "precision": 0.6271379703534777,
+          "recall": 0.6152125279642058,
+          "f1-score": 0.6211180124223602,
+          "support": 894.0
+        },
+        "4": {
+          "precision": 0.5803571428571429,
+          "recall": 0.7492795389048992,
+          "f1-score": 0.6540880503144654,
+          "support": 347.0
+        },
+        "accuracy": 0.6690671031096563,
+        "macro avg": {
+          "precision": 0.6600434714332858,
+          "recall": 0.6926116866327858,
+          "f1-score": 0.6725295065424515,
+          "support": 3055.0
+        },
+        "weighted avg": {
+          "precision": 0.6712534017383571,
+          "recall": 0.6690671031096563,
+          "f1-score": 0.6674968964795065,
+          "support": 3055.0
+        }
+      }
+    }
+  },
+  "best_model": "random_forest",
+  "class_distribution": {
+    "1": 2832,
+    "2": 4424,
+    "3": 3575,
+    "4": 1387
+  },
+  "train_rows": 9163,
+  "test_rows": 3055,
+  "feature_importance": [
+    {
+      "feature": "flow_per_lane",
+      "importance": 0.1444
+    },
+    {
+      "feature": "congestion_index",
+      "importance": 0.109
+    },
+    {
+      "feature": "blocked_lane_ratio",
+      "importance": 0.0985
+    },
+    {
+      "feature": "incident_type_Collision",
+      "importance": 0.095
+    },
+    {
+      "feature": "occupancy_pct",
+      "importance": 0.0765
+    },
+    {
+      "feature": "lanes_blocked",
+      "importance": 0.0746
+    },
+    {
+      "feature": "speed_ratio",
+      "importance": 0.0661
+    },
+    {
+      "feature": "avg_speed_kmph",
+      "importance": 0.0553
+    },
+    {
+      "feature": "vehicles_involved",
+      "importance": 0.0259
+    },
+    {
+      "feature": "hour",
+      "importance": 0.024
+    },
+    {
+      "feature": "speed_limit_kmph",
+      "importance": 0.0225
+    },
+    {
+      "feature": "length_km",
+      "importance": 0.0217
+    },
+    {
+      "feature": "weather_Clear",
+      "importance": 0.0182
+    },
+    {
+      "feature": "weather_Heavy Rain",
+      "importance": 0.0167
+    },
+    {
+      "feature": "day_of_week",
+      "importance": 0.015
+    }
+  ],
+  "decision_rules": "|--- congestion_index <= 0.90\n|   |--- lanes_blocked <= -0.63\n|   |   |--- incident_type_Collision <= 0.50\n|   |   |   |--- congestion_index <= -0.18\n|   |   |   |   |--- speed_limit_kmph <= 0.82\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- speed_limit_kmph >  0.82\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |--- congestion_index >  -0.18\n|   |   |   |   |--- flow_per_lane <= 2.33\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- flow_per_lane >  2.33\n|   |   |   |   |   |--- truncated branch of depth 2\n|   |   |--- incident_type_Collision >  0.50\n|   |   |   |--- speed_ratio <= 0.92\n|   |   |   |   |--- weather_Heavy Rain <= 0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- weather_Heavy Rain >  0.50\n|   |   |   |   |   |--- class: 3\n|   |   |   |--- speed_ratio >  0.92\n|   |   |   |   |--- weather_Clear <= 0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- weather_Clear >  0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |--- lanes_blocked >  -0.63\n|   |   |--- incident_type_Collision <= 0.50\n|   |   |   |--- blocked_lane_ratio <= 0.11\n|   |   |   |   |--- occupancy_pct <= -1.01\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- occupancy_pct >  -1.01\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |--- blocked_lane_ratio >  0.11\n|   |   |   |   |--- weather_Heavy Rain <= 0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- weather_Heavy Rain >  0.50\n|   |   |   |   |   |--- class: 3\n|   |   |--- incident_type_Collision >  0.50\n|   |   |   |--- lanes_blocked <= 0.30\n|   |   |   |   |--- weather_Clear <= 0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- weather_Clear >  0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |--- lanes_blocked >  0.30\n|   |   |   |   |--- weather_Clear <= 0.50\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- weather_Clear >  0.50\n|   |   |   |   |   |--- truncated branch of depth 3\n|--- congestion_index >  0.90\n|   |--- incident_type_Collision <= 0.50\n|   |   |--- flow_per_lane <= -0.60\n|   |   |   |--- flow_per_lane <= -0.69\n|   |   |   |   |--- speed_limit_kmph <= -0.37\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- speed_limit_kmph >  -0.37\n|   |   |   |   |   |--- class: 4\n|   |   |   |--- flow_per_lane >  -0.69\n|   |   |   |   |--- zone_West <= 0.50\n|   |   |   |   |   |--- class: 3\n|   |   |   |   |--- zone_West >  0.50\n|   |   |   |   |   |--- class: 3\n|   |   |--- flow_per_lane >  -0.60\n|   |   |   |--- road_type_Highway <= 0.50\n|   |   |   |   |--- flow_per_lane <= -0.49\n|   |   |   |   |   |--- class: 2\n|   |   |   |   |--- flow_per_lane >  -0.49\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |--- road_type_Highway >  0.50\n|   |   |   |   |--- flow_per_lane <= -0.22\n|   |   |   |   |   |--- class: 4\n|   |   |   |   |--- flow_per_lane >  -0.22\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |--- incident_type_Collision >  0.50\n|   |   |--- flow_per_lane <= -0.72\n|   |   |   |--- speed_limit_kmph <= -0.37\n|   |   |   |   |--- flow_per_lane <= -0.93\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |   |--- flow_per_lane >  -0.93\n|   |   |   |   |   |--- truncated branch of depth 3\n|   |   |   |--- speed_limit_kmph >  -0.37\n|   |   |   |   |--- class: 4\n|   |   |--- flow_per_lane >  -0.72\n|   |   |   |--- speed_limit_kmph <= 0.82\n|   |   |   |   |--- flow_per_lane <= -0.57\n|   |   |   |   |   |--- truncated branch of depth 3\n|   |   |   |   |--- flow_per_lane >  -0.57\n|   |   |   |   |   |--- truncated branch of depth 4\n|   |   |   |--- speed_limit_kmph >  0.82\n|   |   |   |   |--- flow_per_lane <= -0.22\n|   |   |   |   |   |--- class: 4\n|   |   |   |   |--- flow_per_lane >  -0.22\n|   |   |   |   |   |--- truncated branch of depth 3\n"
+}

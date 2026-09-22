@@ -1,0 +1,19 @@
+{
+  "readings": {
+    "rows_in": 530856,
+    "duplicate_rows_removed": 5256,
+    "out_of_range_values_voided": 4729,
+    "weather_missing_before": 10512,
+    "missing_values_imputed": 24635,
+    "outliers_flagged": 957,
+    "rows_out": 525600
+  },
+  "incidents": {
+    "rows_in": 12218,
+    "duplicate_rows_removed": 0,
+    "missing_values_imputed": 610,
+    "rows_out": 12218
+  },
+  "analytical_base_rows": 525600,
+  "incident_feature_rows": 12218
+}

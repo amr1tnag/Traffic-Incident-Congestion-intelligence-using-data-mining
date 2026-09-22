@@ -1,0 +1,43 @@
+incident_type,zone,incidents,avg_severity,avg_duration_min,avg_response_min,casualties
+ALL,ALL,12218,2.288,74.55,14.58,2827
+ALL,Central,2969,2.28,74.46,14.25,693
+ALL,East,1450,2.303,74.27,14.35,343
+ALL,North,3693,2.323,75.4,14.85,931
+ALL,South,2554,2.27,74.39,14.65,527
+ALL,West,1552,2.235,73.24,14.65,333
+Breakdown,ALL,2946,2.059,67.56,15.4,0
+Breakdown,Central,716,2.028,65.92,15.54,0
+Breakdown,East,328,2.116,68.69,15.43,0
+Breakdown,North,897,2.1,70.17,15.21,0
+Breakdown,South,622,2.058,67.55,15.12,0
+Breakdown,West,383,1.977,63.58,15.97,0
+Collision,ALL,4071,2.744,86.75,13.19,2827
+Collision,Central,978,2.781,87.21,12.52,693
+Collision,East,477,2.782,88.81,12.58,343
+Collision,North,1250,2.774,87.05,13.75,931
+Collision,South,832,2.708,86.19,13.36,527
+Collision,West,534,2.629,84.22,13.41,333
+Debris,ALL,1484,2.071,69.15,15.22,0
+Debris,Central,373,2.046,70.96,14.85,0
+Debris,East,200,2.09,67.12,15.46,0
+Debris,North,446,2.083,67.99,15.23,0
+Debris,South,290,2.079,68.15,16.23,0
+Debris,West,175,2.063,72.21,14.07,0
+Pedestrian,ALL,759,2.057,70.8,14.35,0
+Pedestrian,Central,180,2.011,72.7,13.79,0
+Pedestrian,East,90,2.033,67.53,16.21,0
+Pedestrian,North,244,2.168,70.3,14.53,0
+Pedestrian,South,152,2.013,75.29,13.98,0
+Pedestrian,West,93,1.946,64.22,13.73,0
+Road Work,ALL,1961,2.072,69.07,15.46,0
+Road Work,Central,476,2.059,69.0,14.84,0
+Road Work,East,221,2.086,66.43,14.98,0
+Road Work,North,566,2.053,68.4,15.95,0
+Road Work,South,439,2.066,70.75,15.53,0
+Road Work,West,259,2.139,70.07,15.85,0
+Signal Failure,ALL,997,2.022,67.11,15.28,0
+Signal Failure,Central,246,2.004,65.76,15.58,0
+Signal Failure,East,134,1.918,64.26,14.08,0
+Signal Failure,North,290,2.09,70.76,16.01,0
+Signal Failure,South,219,2.046,63.96,14.86,0
+Signal Failure,West,108,1.963,70.29,14.99,0

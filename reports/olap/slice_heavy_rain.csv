@@ -1,0 +1,5 @@
+weather,road_type,observations,avg_congestion,avg_delay_index,pct_congested_hours
+Heavy Rain,Collector,8037,0.5008,0.4385,32.56
+Heavy Rain,Arterial,8883,0.4979,0.4346,30.5
+Heavy Rain,Residential,4653,0.4706,0.4145,25.08
+Heavy Rain,Highway,3807,0.4491,0.3978,20.99

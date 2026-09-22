@@ -1,0 +1,471 @@
+{
+  "n_transactions": 12218,
+  "parameters": {
+    "min_support": 0.05,
+    "min_confidence": 0.55,
+    "min_lift": 1.1,
+    "max_itemset_size": 3
+  },
+  "frequent_itemsets_by_size": {
+    "L1": 51,
+    "L2": 568,
+    "L3": 1102
+  },
+  "n_rules": 406,
+  "top_rules": [
+    {
+      "antecedent": "SEVERITY=Minor, TIME=Night",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.0501,
+      "confidence": 0.9415,
+      "lift": 6.0072,
+      "leverage": 0.0418,
+      "conviction": 14.4243,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, WEEKEND=No",
+      "consequent": "TIME=Night",
+      "support": 0.076,
+      "confidence": 0.7638,
+      "lift": 4.9744,
+      "leverage": 0.0607,
+      "conviction": 3.5834,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "TIME=Night, WEATHER=Clear",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.0584,
+      "confidence": 0.7368,
+      "lift": 4.7012,
+      "leverage": 0.046,
+      "conviction": 3.2044,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "TIME=Night, VEHICLES=2-3",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.064,
+      "confidence": 0.7254,
+      "lift": 4.6283,
+      "leverage": 0.0502,
+      "conviction": 3.0711,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "TIME=Night",
+      "consequent": "CONGESTION=Free flow, PEAK=No",
+      "support": 0.1102,
+      "confidence": 0.718,
+      "lift": 4.6221,
+      "leverage": 0.0864,
+      "conviction": 2.9954,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, PEAK=No",
+      "consequent": "TIME=Night",
+      "support": 0.1102,
+      "confidence": 0.7097,
+      "lift": 4.6221,
+      "leverage": 0.0864,
+      "conviction": 2.9157,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "PEAK=No, TIME=Night",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.1102,
+      "confidence": 0.718,
+      "lift": 4.5811,
+      "leverage": 0.0862,
+      "conviction": 2.9905,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "TIME=Night",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.1102,
+      "confidence": 0.718,
+      "lift": 4.5811,
+      "leverage": 0.0862,
+      "conviction": 2.9905,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Free flow",
+      "consequent": "PEAK=No, TIME=Night",
+      "support": 0.1102,
+      "confidence": 0.7034,
+      "lift": 4.5811,
+      "leverage": 0.0862,
+      "conviction": 2.8538,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Free flow",
+      "consequent": "TIME=Night",
+      "support": 0.1102,
+      "confidence": 0.7034,
+      "lift": 4.5811,
+      "leverage": 0.0862,
+      "conviction": 2.8538,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, VEHICLES=2-3",
+      "consequent": "TIME=Night",
+      "support": 0.064,
+      "confidence": 0.6988,
+      "lift": 4.5514,
+      "leverage": 0.0499,
+      "conviction": 2.8106,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, WEATHER=Clear",
+      "consequent": "TIME=Night",
+      "support": 0.0584,
+      "confidence": 0.6885,
+      "lift": 4.4842,
+      "leverage": 0.0454,
+      "conviction": 2.7176,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "TIME=Night, WEEKEND=No",
+      "consequent": "CONGESTION=Free flow",
+      "support": 0.076,
+      "confidence": 0.6936,
+      "lift": 4.4251,
+      "leverage": 0.0588,
+      "conviction": 2.7519,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, SEVERITY=Minor",
+      "consequent": "TIME=Night",
+      "support": 0.0501,
+      "confidence": 0.6145,
+      "lift": 4.0018,
+      "leverage": 0.0376,
+      "conviction": 2.1955,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "SEVERITY=Critical",
+      "consequent": "CONGESTION=Severe, TYPE=Collision",
+      "support": 0.0742,
+      "confidence": 0.6539,
+      "lift": 3.6701,
+      "leverage": 0.054,
+      "conviction": 2.3747,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Free flow, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0622,
+      "confidence": 0.7615,
+      "lift": 3.2854,
+      "leverage": 0.0433,
+      "conviction": 3.2213,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, TYPE=Breakdown",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0529,
+      "confidence": 0.685,
+      "lift": 2.9555,
+      "leverage": 0.035,
+      "conviction": 2.4391,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, WEATHER=Clear",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.1032,
+      "confidence": 0.6557,
+      "lift": 2.8291,
+      "leverage": 0.0667,
+      "conviction": 2.2315,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "DURATION=20-45m, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0697,
+      "confidence": 0.6506,
+      "lift": 2.8069,
+      "leverage": 0.0448,
+      "conviction": 2.1987,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, PEAK=No",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.1404,
+      "confidence": 0.6451,
+      "lift": 2.7832,
+      "leverage": 0.09,
+      "conviction": 2.1647,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "SEVERITY=Minor",
+      "consequent": "LANES_BLOCKED=0, PEAK=No",
+      "support": 0.1404,
+      "confidence": 0.6059,
+      "lift": 2.7832,
+      "leverage": 0.09,
+      "conviction": 1.9852,
+      "antecedent_size": 1
+    },
+    {
+      "antecedent": "CONGESTION=Light, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.067,
+      "confidence": 0.6416,
+      "lift": 2.7679,
+      "leverage": 0.0428,
+      "conviction": 2.1433,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Severe, TIME=Evening",
+      "consequent": "PEAK=Yes",
+      "support": 0.1286,
+      "confidence": 0.8675,
+      "lift": 2.6563,
+      "leverage": 0.0802,
+      "conviction": 5.0816,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "ROAD=Collector, SEVERITY=Minor",
+      "consequent": "LANES_BLOCKED=0",
+      "support": 0.0619,
+      "confidence": 0.8372,
+      "lift": 2.6028,
+      "leverage": 0.0381,
+      "conviction": 4.167,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Light, SEVERITY=Minor",
+      "consequent": "LANES_BLOCKED=0",
+      "support": 0.067,
+      "confidence": 0.8313,
+      "lift": 2.5844,
+      "leverage": 0.041,
+      "conviction": 4.021,
+      "antecedent_size": 2
+    }
+  ],
+  "severity_rules": [
+    {
+      "antecedent": "CONGESTION=Free flow, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0622,
+      "confidence": 0.7615,
+      "lift": 3.2854,
+      "leverage": 0.0433,
+      "conviction": 3.2213,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, TYPE=Breakdown",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0529,
+      "confidence": 0.685,
+      "lift": 2.9555,
+      "leverage": 0.035,
+      "conviction": 2.4391,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, WEATHER=Clear",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.1032,
+      "confidence": 0.6557,
+      "lift": 2.8291,
+      "leverage": 0.0667,
+      "conviction": 2.2315,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "DURATION=20-45m, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0697,
+      "confidence": 0.6506,
+      "lift": 2.8069,
+      "leverage": 0.0448,
+      "conviction": 2.1987,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, PEAK=No",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.1404,
+      "confidence": 0.6451,
+      "lift": 2.7832,
+      "leverage": 0.09,
+      "conviction": 2.1647,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "CONGESTION=Light, LANES_BLOCKED=0",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.067,
+      "confidence": 0.6416,
+      "lift": 2.7679,
+      "leverage": 0.0428,
+      "conviction": 2.1433,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, VEHICLES=2-3",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.1058,
+      "confidence": 0.5832,
+      "lift": 2.5162,
+      "leverage": 0.0638,
+      "conviction": 1.8432,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, ROAD=Collector",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0619,
+      "confidence": 0.5758,
+      "lift": 2.4841,
+      "leverage": 0.037,
+      "conviction": 1.8109,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, ROAD=Arterial",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.0729,
+      "confidence": 0.5756,
+      "lift": 2.4832,
+      "leverage": 0.0436,
+      "conviction": 1.81,
+      "antecedent_size": 2
+    },
+    {
+      "antecedent": "LANES_BLOCKED=0, RESPONSE=Slow",
+      "consequent": "SEVERITY=Minor",
+      "support": 0.05,
+      "confidence": 0.5732,
+      "lift": 2.4728,
+      "leverage": 0.0298,
+      "conviction": 1.7998,
+      "antecedent_size": 2
+    }
+  ],
+  "top_frequent_itemsets": [
+    {
+      "itemset": "WEEKEND=No",
+      "support": 0.7537
+    },
+    {
+      "itemset": "PEAK=No",
+      "support": 0.6734
+    },
+    {
+      "itemset": "VEHICLES=2-3",
+      "support": 0.5677
+    },
+    {
+      "itemset": "CONGESTION=Severe",
+      "support": 0.5269
+    },
+    {
+      "itemset": "PEAK=No, WEEKEND=No",
+      "support": 0.5062
+    },
+    {
+      "itemset": "WEATHER=Clear",
+      "support": 0.4888
+    },
+    {
+      "itemset": "CONGESTION=Severe, WEEKEND=No",
+      "support": 0.4314
+    },
+    {
+      "itemset": "VEHICLES=2-3, WEEKEND=No",
+      "support": 0.4275
+    },
+    {
+      "itemset": "ROAD=Arterial",
+      "support": 0.4263
+    },
+    {
+      "itemset": "PEAK=No, VEHICLES=2-3",
+      "support": 0.3848
+    },
+    {
+      "itemset": "WEATHER=Clear, WEEKEND=No",
+      "support": 0.371
+    },
+    {
+      "itemset": "SEVERITY=Moderate",
+      "support": 0.3621
+    },
+    {
+      "itemset": "LANES_BLOCKED=2+",
+      "support": 0.3517
+    },
+    {
+      "itemset": "DURATION=45-90m",
+      "support": 0.3447
+    },
+    {
+      "itemset": "PEAK=No, WEATHER=Clear",
+      "support": 0.3386
+    },
+    {
+      "itemset": "TYPE=Collision",
+      "support": 0.3332
+    },
+    {
+      "itemset": "LANES_BLOCKED=1",
+      "support": 0.3266
+    },
+    {
+      "itemset": "PEAK=Yes",
+      "support": 0.3266
+    },
+    {
+      "itemset": "ROAD=Arterial, WEEKEND=No",
+      "support": 0.3224
+    },
+    {
+      "itemset": "LANES_BLOCKED=0",
+      "support": 0.3217
+    },
+    {
+      "itemset": "RESPONSE=Fast",
+      "support": 0.3188
+    },
+    {
+      "itemset": "RESPONSE=Normal",
+      "support": 0.3049
+    },
+    {
+      "itemset": "ZONE=North",
+      "support": 0.3023
+    },
+    {
+      "itemset": "VEHICLES=4+",
+      "support": 0.2982
+    },
+    {
+      "itemset": "CONGESTION=Severe, VEHICLES=2-3",
+      "support": 0.2981
+    }
+  ]
+}

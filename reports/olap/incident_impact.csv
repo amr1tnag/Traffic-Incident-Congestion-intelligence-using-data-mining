@@ -1,0 +1,3 @@
+state,observations,avg_congestion,avg_speed,avg_travel_time
+Incident hour,12218,0.729,24.47,13.797
+Normal hour,513382,0.349,38.95,6.641

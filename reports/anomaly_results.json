@@ -1,0 +1,236 @@
+{
+  "rows_scored": 525600,
+  "iso_anomalies": 5080,
+  "zscore_anomalies": 8174,
+  "agreed_anomalies": 1598,
+  "agreed_without_logged_incident": 326,
+  "anomaly_rate_pct_by_zone": {
+    "Central": 1.127,
+    "East": 1.798,
+    "North": 0.629,
+    "South": 1.015,
+    "West": 0.508
+  },
+  "top_anomalies": [
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-07-13 09:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.21,
+      "seasonal_z": 5.477,
+      "iso_score": -0.0961,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-07-18 09:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 4.95,
+      "iso_score": -0.0961,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-01-25 18:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 4.821,
+      "iso_score": -0.0959,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-03-28 05:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.3,
+      "seasonal_z": 4.723,
+      "iso_score": -0.0956,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-09-29 08:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 5.105,
+      "iso_score": -0.0951,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG014",
+      "timestamp": "2024-05-19 20:00:00",
+      "zone": "South",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 5.824,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG014",
+      "timestamp": "2024-06-05 12:00:00",
+      "zone": "South",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 3.767,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG014",
+      "timestamp": "2024-07-26 15:00:00",
+      "zone": "South",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 4.007,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-01-30 05:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 6.203,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-05-13 19:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 3.816,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-07-27 13:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 5.617,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-09-27 22:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 6.219,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-10-01 15:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.14,
+      "seasonal_z": 4.276,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-09-22 14:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 6.61,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG042",
+      "timestamp": "2024-11-14 16:00:00",
+      "zone": "West",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.08,
+      "seasonal_z": 4.184,
+      "iso_score": -0.0948,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG023",
+      "timestamp": "2024-03-16 16:00:00",
+      "zone": "Central",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 4.14,
+      "iso_score": -0.0944,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG014",
+      "timestamp": "2024-06-03 20:00:00",
+      "zone": "South",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 4.19,
+      "seasonal_z": 5.366,
+      "iso_score": -0.0943,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG006",
+      "timestamp": "2024-02-27 20:00:00",
+      "zone": "East",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 5.892,
+      "iso_score": -0.0941,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG006",
+      "timestamp": "2024-07-16 17:00:00",
+      "zone": "East",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 5.195,
+      "iso_score": -0.0941,
+      "incident_count": 1
+    },
+    {
+      "segment_id": "SEG006",
+      "timestamp": "2024-11-19 06:00:00",
+      "zone": "East",
+      "road_type": "Residential",
+      "congestion_index": 1.0,
+      "avg_speed_kmph": 3.0,
+      "seasonal_z": 6.004,
+      "iso_score": -0.0941,
+      "incident_count": 1
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+segment_id,zone,road_type,avg_congestion,pct_congested_hours,incidents
+SEG027,North,Arterial,0.4927,38.11,299
+SEG022,Central,Arterial,0.4914,38.55,297
+SEG044,Central,Arterial,0.4893,37.11,328
+SEG029,Central,Arterial,0.489,38.08,265
+SEG030,North,Collector,0.4817,36.46,213
+SEG046,East,Residential,0.4795,36.06,113
+SEG002,Central,Arterial,0.4716,33.95,278
+SEG034,East,Arterial,0.4599,31.74,296
+SEG040,South,Collector,0.4561,30.95,181
+SEG014,South,Residential,0.4514,30.21,119

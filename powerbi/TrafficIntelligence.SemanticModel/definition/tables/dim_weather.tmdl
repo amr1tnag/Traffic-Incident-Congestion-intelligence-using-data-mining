@@ -1,0 +1,42 @@
+table dim_weather
+	lineageTag: f197da04-abc1-501d-8686-4cda39b02485
+
+	column weather_key
+		dataType: int64
+		isHidden
+		lineageTag: 9e2261e8-2e8c-53a2-a0d0-442608763709
+		summarizeBy: none
+		sourceColumn: weather_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column weather
+		dataType: string
+		lineageTag: d6949ecf-ea9b-5b97-ab86-ad2af5dcc68c
+		summarizeBy: none
+		sourceColumn: weather
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_adverse
+		dataType: int64
+		lineageTag: 5b967aa0-4524-5c19-b2c9-24862b5c49fd
+		summarizeBy: none
+		sourceColumn: is_adverse
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_weather = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "dim_weather.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"weather_key", Int64.Type}, {"weather", type text}, {"is_adverse", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

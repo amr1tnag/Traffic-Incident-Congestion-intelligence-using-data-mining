@@ -1,0 +1,53 @@
+table dim_incident_type
+	lineageTag: 87257723-c649-5b75-9fc2-c861aa12ae81
+
+	column incident_type_key
+		dataType: int64
+		isHidden
+		lineageTag: 9819877e-ea35-5968-9ff8-0ce85a588a17
+		summarizeBy: none
+		sourceColumn: incident_type_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_type
+		dataType: string
+		lineageTag: 7d71edcf-7644-5c40-a2a9-9552899a43a7
+		summarizeBy: none
+		sourceColumn: incident_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 4244a099-1cf9-5d5d-93c1-4793cf5f8395
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Incident
+		lineageTag: a0da1780-f0f0-537f-8dda-353bd5e8d661
+
+		level Category
+			lineageTag: fa9974b1-978a-53f9-bc34-2cc5cd1a0910
+			column: category
+
+		level Type
+			lineageTag: 2167029b-7bec-5f23-ac48-9e7a5c9a58c0
+			column: incident_type
+
+	partition dim_incident_type = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "dim_incident_type.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"incident_type_key", Int64.Type}, {"incident_type", type text}, {"category", type text}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

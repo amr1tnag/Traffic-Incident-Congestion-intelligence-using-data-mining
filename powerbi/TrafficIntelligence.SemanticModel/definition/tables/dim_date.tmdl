@@ -1,0 +1,146 @@
+table dim_date
+	dataCategory: Time
+	lineageTag: 4afb0e31-dbe1-58a0-9230-bdea10f8b281
+
+	column date_key
+		dataType: int64
+		isHidden
+		lineageTag: 568134c3-9dc9-54e9-9aa2-1aed7c69d22f
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: 7e2b9d71-0a81-5746-8184-8aa357b5bd14
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		lineageTag: bf74cf51-00f0-5c43-8330-4de73a18c33e
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		lineageTag: dcb0f167-d0ac-5d21-af88-24df4baa5ec4
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter_name
+		dataType: string
+		lineageTag: cdc0f921-e83e-51c6-839f-f703d3ccd0a2
+		summarizeBy: none
+		sourceColumn: quarter_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		lineageTag: 3f31f6ff-7a3d-5112-b82f-2e54fd74efec
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 11cc056a-00dc-55d5-bcfc-89dfa52c2c50
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: 1a997ee0-38ff-5626-8e13-23b58cbe5be5
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		lineageTag: 5c4eb545-fe92-5f43-a0b1-d7273ad294b5
+		summarizeBy: none
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		lineageTag: 5b197f5a-f227-5beb-9a2f-bd0630456f1c
+		summarizeBy: none
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		lineageTag: 7ea619df-cd77-54b7-9d85-79badd1d3cb5
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		lineageTag: b678e85f-3ed2-5728-93ea-79922724c8c6
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: int64
+		lineageTag: e58c2bc9-49fc-59d4-ae51-69fd3ef96553
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Calendar
+		lineageTag: ef407061-68ec-5588-b602-13ec322eef55
+
+		level Year
+			lineageTag: 30e7ddee-892c-593a-a3a8-36275761b016
+			column: year
+
+		level Quarter
+			lineageTag: 024d4d7d-e6d9-5fe7-9a77-d59bf6668412
+			column: quarter_name
+
+		level Month
+			lineageTag: f4cede53-b06c-5398-9243-d93b89a72236
+			column: month_name
+
+		level Day
+			lineageTag: a7646bd1-4149-5481-b552-da4820409f30
+			column: day_of_month
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "dim_date.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"date_key", Int64.Type}, {"date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type}, {"quarter_name", type text}, {"month", Int64.Type}, {"month_name", type text}, {"year_month", type text}, {"week_of_year", Int64.Type}, {"day_of_month", Int64.Type}, {"day_of_week", Int64.Type}, {"day_name", type text}, {"is_weekend", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

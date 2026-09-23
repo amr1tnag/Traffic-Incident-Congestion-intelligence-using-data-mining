@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "TrafficIntelligence"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dbaef25a-819b-5afd-bd95-f0ef40a3d7b8"
+  }
+}

@@ -1,0 +1,127 @@
+table dim_segment
+	lineageTag: a4d3715c-ea80-532f-8007-2e0d818b2279
+
+	column segment_key
+		dataType: int64
+		isHidden
+		lineageTag: 4495eef8-5516-5adb-9a47-5138e32a8835
+		summarizeBy: none
+		sourceColumn: segment_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_id
+		dataType: string
+		lineageTag: eafa0caf-c3ab-5853-9209-eaa93286fbe6
+		summarizeBy: none
+		sourceColumn: segment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_name
+		dataType: string
+		lineageTag: 560bbd0b-d502-5f90-bba2-f8436af99bd5
+		summarizeBy: none
+		sourceColumn: segment_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone
+		dataType: string
+		lineageTag: 668427ae-2ca2-58f6-921e-73e884fe0a3c
+		summarizeBy: none
+		sourceColumn: zone
+		dataCategory: Place
+
+		annotation SummarizationSetBy = Automatic
+
+	column road_type
+		dataType: string
+		lineageTag: 56db4ad7-ec51-50c1-8eed-aa796d7cd716
+		summarizeBy: none
+		sourceColumn: road_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column lanes
+		dataType: int64
+		lineageTag: b3c1f45a-dd9b-5503-a0c9-67739c494035
+		summarizeBy: none
+		sourceColumn: lanes
+
+		annotation SummarizationSetBy = Automatic
+
+	column length_km
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 1db0f99f-6148-5790-8409-fe90c96fd4dc
+		summarizeBy: sum
+		sourceColumn: length_km
+
+		annotation SummarizationSetBy = Automatic
+
+	column speed_limit_kmph
+		dataType: int64
+		lineageTag: 8dab1bf4-a74e-5605-9691-df7b26fd879d
+		summarizeBy: none
+		sourceColumn: speed_limit_kmph
+
+		annotation SummarizationSetBy = Automatic
+
+	column signalised
+		dataType: int64
+		lineageTag: f196515b-07c1-5d26-91d4-7530074dde56
+		summarizeBy: none
+		sourceColumn: signalised
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		formatString: 0.00000
+		lineageTag: 34921abb-d079-5a3b-8bea-4e21b99c90fd
+		summarizeBy: none
+		sourceColumn: latitude
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: double
+		formatString: 0.00000
+		lineageTag: 67f92a16-4d5e-59e8-8fa7-3410268f9a5e
+		summarizeBy: none
+		sourceColumn: longitude
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Geography
+		lineageTag: 0d936779-debf-58db-8d7e-43af5147ce75
+
+		level Zone
+			lineageTag: 7e91fc21-ed42-5d0f-8256-e4f129624ba0
+			column: zone
+
+		level 'Road type'
+			lineageTag: e922aef8-2339-5a26-9df0-8cf6c7d4b9fd
+			column: road_type
+
+		level Segment
+			lineageTag: 7802e02f-d046-5839-ae6c-6178ae7c3967
+			column: segment_id
+
+	partition dim_segment = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "dim_segment.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"segment_key", Int64.Type}, {"segment_id", type text}, {"segment_name", type text}, {"zone", type text}, {"road_type", type text}, {"lanes", Int64.Type}, {"length_km", type number}, {"speed_limit_kmph", Int64.Type}, {"signalised", Int64.Type}, {"latitude", type number}, {"longitude", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

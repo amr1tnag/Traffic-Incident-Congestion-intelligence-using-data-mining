@@ -1,0 +1,105 @@
+table mining_anomalies
+	lineageTag: 35695d35-f70a-5c9e-ae7d-e9dec322e42b
+
+	column segment_id
+		dataType: string
+		lineageTag: bc3d8af1-50f3-53da-9939-059ba763fbda
+		summarizeBy: none
+		sourceColumn: segment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: bd132337-fdaa-5f3e-a3f9-8c313b3a833c
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone
+		dataType: string
+		lineageTag: 2ea1a640-3fc2-5b58-b417-84b8abae29c0
+		summarizeBy: none
+		sourceColumn: zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column congestion_index
+		dataType: double
+		formatString: #,0.000
+		lineageTag: d598cbed-f517-5dc3-a5d2-676e8f73658b
+		summarizeBy: sum
+		sourceColumn: congestion_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column seasonal_z
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 97a0b660-55e5-566b-a0be-e5ad9383fe3d
+		summarizeBy: sum
+		sourceColumn: seasonal_z
+
+		annotation SummarizationSetBy = Automatic
+
+	column iso_score
+		dataType: double
+		formatString: #,0.000
+		lineageTag: caeb5837-b082-57fd-8102-9e3fe62f82e4
+		summarizeBy: sum
+		sourceColumn: iso_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column iso_anomaly
+		dataType: int64
+		formatString: #,0
+		lineageTag: d57f4f61-bf79-57b7-bc6d-a07c22299f4b
+		summarizeBy: sum
+		sourceColumn: iso_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column z_anomaly
+		dataType: int64
+		formatString: #,0
+		lineageTag: 24c8f107-621a-5182-b526-813df4be537d
+		summarizeBy: sum
+		sourceColumn: z_anomaly
+
+		annotation SummarizationSetBy = Automatic
+
+	column anomaly_agreement
+		dataType: int64
+		formatString: #,0
+		lineageTag: cc12f6ba-eecd-568e-81fe-1da243762a73
+		summarizeBy: sum
+		sourceColumn: anomaly_agreement
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_count
+		dataType: int64
+		formatString: #,0
+		lineageTag: 539c0a05-233a-567c-875e-a27caddec859
+		summarizeBy: sum
+		sourceColumn: incident_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mining_anomalies = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "mining_anomalies.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"segment_id", type text}, {"timestamp", type datetime}, {"zone", type text}, {"congestion_index", type number}, {"seasonal_z", type number}, {"iso_score", type number}, {"iso_anomaly", Int64.Type}, {"z_anomaly", Int64.Type}, {"anomaly_agreement", Int64.Type}, {"incident_count", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

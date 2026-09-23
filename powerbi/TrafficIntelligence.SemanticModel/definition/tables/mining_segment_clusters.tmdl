@@ -1,0 +1,210 @@
+table mining_segment_clusters
+	lineageTag: 3e629b4d-a2d3-5f16-904e-439b3d557f1b
+
+	column segment_id
+		dataType: string
+		lineageTag: e9d90c53-8ed4-56ec-bf56-2a8fa51be0ba
+		summarizeBy: none
+		sourceColumn: segment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone
+		dataType: string
+		lineageTag: 9ef1a1f8-97df-55a0-92bc-3fcc7e3f3fd3
+		summarizeBy: none
+		sourceColumn: zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column road_type
+		dataType: string
+		lineageTag: 15cd3101-164a-5973-bb0e-bf4fbff462ec
+		summarizeBy: none
+		sourceColumn: road_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column lanes
+		dataType: int64
+		lineageTag: 241f1701-8249-579d-b9fc-69e9874d7af8
+		summarizeBy: none
+		sourceColumn: lanes
+
+		annotation SummarizationSetBy = Automatic
+
+	column length_km
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 0c27ad55-c18b-56ea-a492-dff16fa0927e
+		summarizeBy: sum
+		sourceColumn: length_km
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		formatString: 0.00000
+		lineageTag: b9e2ebc3-bdc4-5018-84bf-6ee0d11eae9c
+		summarizeBy: none
+		sourceColumn: latitude
+		dataCategory: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: double
+		formatString: 0.00000
+		lineageTag: 599fa1e6-039d-5676-aff2-7544081ad8b9
+		summarizeBy: none
+		sourceColumn: longitude
+		dataCategory: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 64d41c20-b1b9-5110-a638-3889d4a694f2
+		summarizeBy: sum
+		sourceColumn: avg_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column peak_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 20aa5e6f-eacb-57b0-86a1-15ff5139fa81
+		summarizeBy: sum
+		sourceColumn: peak_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_speed_ratio
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 58fd9ece-0f6e-5eea-88ed-8661a0a2c4cb
+		summarizeBy: sum
+		sourceColumn: avg_speed_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_congested_hours
+		dataType: double
+		formatString: #,0.000
+		lineageTag: f734455d-5b05-5d8a-9fe5-98fbf5d7eb6e
+		summarizeBy: sum
+		sourceColumn: pct_congested_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	column incidents
+		dataType: int64
+		formatString: #,0
+		lineageTag: ce628db6-2403-5bee-ac70-180dfafd2604
+		summarizeBy: sum
+		sourceColumn: incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column observations
+		dataType: int64
+		formatString: #,0
+		lineageTag: e2d77e20-80d6-5085-aacc-958d6091af40
+		summarizeBy: sum
+		sourceColumn: observations
+
+		annotation SummarizationSetBy = Automatic
+
+	column peak_offpeak_ratio
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 31027dbc-7579-55ba-bb9a-d0f06b6eab64
+		summarizeBy: sum
+		sourceColumn: peak_offpeak_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekend_ratio
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 7bf0d5bb-c23b-5643-a6ba-3b4522273a1b
+		summarizeBy: sum
+		sourceColumn: weekend_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column wet_penalty
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 3d961f6c-d3a1-5b65-85b4-8b03fcc70a97
+		summarizeBy: sum
+		sourceColumn: wet_penalty
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_rate_per_1k_h
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 50361b42-0eab-52ae-93f9-39ca40667ee2
+		summarizeBy: sum
+		sourceColumn: incident_rate_per_1k_h
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster
+		dataType: int64
+		lineageTag: ee6a2612-4e9a-50bb-bc8e-451ddb74393a
+		summarizeBy: none
+		sourceColumn: cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column cluster_label
+		dataType: string
+		lineageTag: ee3dee00-dd0b-5362-abda-41721c2a77d6
+		summarizeBy: none
+		sourceColumn: cluster_label
+
+		annotation SummarizationSetBy = Automatic
+
+	column dbscan_cluster
+		dataType: int64
+		lineageTag: 5a681252-ee71-594c-8a06-585d48925d45
+		summarizeBy: none
+		sourceColumn: dbscan_cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column pca_1
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 28d260e1-e203-5046-b011-09bfb6be35cc
+		summarizeBy: sum
+		sourceColumn: pca_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column pca_2
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 014ec6fa-ba2c-50a8-a759-8df0ddb687b8
+		summarizeBy: sum
+		sourceColumn: pca_2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mining_segment_clusters = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "mining_segment_clusters.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"segment_id", type text}, {"zone", type text}, {"road_type", type text}, {"lanes", Int64.Type}, {"length_km", type number}, {"latitude", type number}, {"longitude", type number}, {"avg_congestion", type number}, {"peak_congestion", type number}, {"avg_speed_ratio", type number}, {"pct_congested_hours", type number}, {"incidents", Int64.Type}, {"observations", Int64.Type}, {"peak_offpeak_ratio", type number}, {"weekend_ratio", type number}, {"wet_penalty", type number}, {"incident_rate_per_1k_h", type number}, {"cluster", Int64.Type}, {"cluster_label", type text}, {"dbscan_cluster", Int64.Type}, {"pca_1", type number}, {"pca_2", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

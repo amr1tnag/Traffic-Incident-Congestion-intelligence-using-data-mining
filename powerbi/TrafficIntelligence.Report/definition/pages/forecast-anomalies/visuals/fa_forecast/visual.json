@@ -1,0 +1,106 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "cc30c8d5-2a58-56ff-ac03-c9bebbab4c2a",
+  "position": {
+    "x": 20,
+    "y": 190,
+    "z": 6,
+    "width": 1240,
+    "height": 260,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_forecast"
+                    }
+                  },
+                  "Property": "timestamp"
+                }
+              },
+              "queryRef": "mining_forecast.timestamp",
+              "nativeQueryRef": "timestamp"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_forecast"
+                    }
+                  },
+                  "Property": "actual"
+                }
+              },
+              "queryRef": "mining_forecast.actual",
+              "nativeQueryRef": "actual"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_forecast"
+                    }
+                  },
+                  "Property": "predicted"
+                }
+              },
+              "queryRef": "mining_forecast.predicted",
+              "nativeQueryRef": "predicted"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_forecast"
+                    }
+                  },
+                  "Property": "persistence"
+                }
+              },
+              "queryRef": "mining_forecast.persistence",
+              "nativeQueryRef": "persistence"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'One-week ahead congestion: actual vs predicted vs naive baseline'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

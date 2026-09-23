@@ -1,0 +1,87 @@
+table mining_association_rules
+	lineageTag: 027ec9c7-db58-556c-bae1-1597bbe67e2b
+
+	column antecedent
+		dataType: string
+		lineageTag: 3b48426d-f149-5d15-a496-0829137a9dda
+		summarizeBy: none
+		sourceColumn: antecedent
+
+		annotation SummarizationSetBy = Automatic
+
+	column consequent
+		dataType: string
+		lineageTag: 81a77fdc-9ff2-5a65-8d96-6eceef396bbb
+		summarizeBy: none
+		sourceColumn: consequent
+
+		annotation SummarizationSetBy = Automatic
+
+	column support
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 99fcbab2-5943-5e12-b276-6670eafe7e02
+		summarizeBy: sum
+		sourceColumn: support
+
+		annotation SummarizationSetBy = Automatic
+
+	column confidence
+		dataType: double
+		formatString: #,0.000
+		lineageTag: f4058310-917d-5f1d-a464-c9420a78487d
+		summarizeBy: sum
+		sourceColumn: confidence
+
+		annotation SummarizationSetBy = Automatic
+
+	column lift
+		dataType: double
+		formatString: #,0.000
+		lineageTag: df41fca7-4571-5739-b087-97d5df1fd016
+		summarizeBy: sum
+		sourceColumn: lift
+
+		annotation SummarizationSetBy = Automatic
+
+	column leverage
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 7a9a9762-fafe-5fe8-8ba0-48ad93a374c1
+		summarizeBy: sum
+		sourceColumn: leverage
+
+		annotation SummarizationSetBy = Automatic
+
+	column conviction
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 44087c0a-8be8-5334-8853-262c7409cb7e
+		summarizeBy: sum
+		sourceColumn: conviction
+
+		annotation SummarizationSetBy = Automatic
+
+	column antecedent_size
+		dataType: int64
+		formatString: #,0
+		lineageTag: ee410ed2-ba01-56f9-a162-66b2b362e803
+		summarizeBy: sum
+		sourceColumn: antecedent_size
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mining_association_rules = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "mining_association_rules.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"antecedent", type text}, {"consequent", type text}, {"support", type number}, {"confidence", type number}, {"lift", type number}, {"leverage", type number}, {"conviction", type number}, {"antecedent_size", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

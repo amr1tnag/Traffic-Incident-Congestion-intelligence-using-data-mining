@@ -1,0 +1,162 @@
+table dim_time
+	lineageTag: 774238a3-9527-512f-87e9-089522e01d51
+
+	column time_key
+		dataType: int64
+		isHidden
+		lineageTag: 8a9954b6-cf55-56ec-9f3c-45191ce092b6
+		summarizeBy: none
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		isHidden
+		lineageTag: d66c87b8-585c-54fc-94cb-a27c9497a078
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 44729051-4252-5ed4-a5af-0ddf66e4d665
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: eb1ba65b-e44a-5e76-8d5f-6d171b64061f
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		lineageTag: 7a18efc6-e627-5605-9fb1-19e6c2e8f1a8
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		lineageTag: c8427b28-c514-572c-867f-3e2f6dccc232
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		lineageTag: 5acf1869-8d10-5c4f-9c23-3c82c8cc04d2
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: 66993d4f-e880-5ea0-afa6-41f7d627bd25
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column week_of_year
+		dataType: int64
+		lineageTag: a0b88070-3cc6-5a07-a264-cc7c4e5bc077
+		summarizeBy: none
+		sourceColumn: week_of_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		lineageTag: 68e10f5b-a65c-53c5-a8b3-a15e3954a4d4
+		summarizeBy: none
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		lineageTag: 8d4d57ff-454f-5d94-a135-c5b3ab745ff4
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		lineageTag: 7a3b161a-6d04-58d4-8c1e-be6c7b947109
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour
+		dataType: int64
+		lineageTag: 0a72e873-6bef-5736-b30f-e5c60de1dbfb
+		summarizeBy: none
+		sourceColumn: hour
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_of_day
+		dataType: string
+		lineageTag: 3414bc71-067f-5d14-a62c-79329965141c
+		summarizeBy: none
+		sourceColumn: time_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: int64
+		lineageTag: 5c2e40a7-b68d-5802-be04-94eaea6f42c3
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_peak_hour
+		dataType: int64
+		lineageTag: c21b320b-f7c8-58bf-9e4d-c6985bafc274
+		summarizeBy: none
+		sourceColumn: is_peak_hour
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Time of day'
+		lineageTag: 5630b122-15f3-5035-8cc2-5580ae7893e3
+
+		level 'Time of day'
+			lineageTag: cfd9baa4-c8b3-5509-baed-b75efae01b2c
+			column: time_of_day
+
+		level Hour
+			lineageTag: d6ef2c2b-2755-523f-8232-f7b76690c237
+			column: hour
+
+	partition dim_time = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "dim_time.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"time_key", Int64.Type}, {"date_key", Int64.Type}, {"timestamp", type datetime}, {"date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"week_of_year", Int64.Type}, {"day_of_month", Int64.Type}, {"day_of_week", Int64.Type}, {"day_name", type text}, {"hour", Int64.Type}, {"time_of_day", type text}, {"is_weekend", Int64.Type}, {"is_peak_hour", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

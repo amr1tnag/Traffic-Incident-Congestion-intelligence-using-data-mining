@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "43a13cb6-fe39-59a1-94d7-a33bf2b489e9",
+  "position": {
+    "x": 20,
+    "y": 64,
+    "z": 1,
+    "width": 620,
+    "height": 380,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "map",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_segment"
+                    }
+                  },
+                  "Property": "segment_id"
+                }
+              },
+              "queryRef": "dim_segment.segment_id",
+              "nativeQueryRef": "segment_id"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "cluster_label"
+                }
+              },
+              "queryRef": "mining_segment_clusters.cluster_label",
+              "nativeQueryRef": "cluster_label"
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Congestion"
+                }
+              },
+              "queryRef": "_Measures.Avg Congestion",
+              "nativeQueryRef": "Avg Congestion"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Hotspot map (bubble size = average congestion)'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

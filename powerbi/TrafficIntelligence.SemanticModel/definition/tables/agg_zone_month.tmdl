@@ -1,0 +1,96 @@
+table agg_zone_month
+	isHidden
+	lineageTag: 4e7c76f7-209f-5374-a193-0090d15a670f
+
+	column zone
+		dataType: string
+		lineageTag: 06277342-2821-5201-a29b-937a3821a044
+		summarizeBy: none
+		sourceColumn: zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		lineageTag: 241227b0-cc75-5ebd-b1e4-deb4c3ad1374
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		lineageTag: a360ad5e-fdca-518e-86e1-f69c8578af8f
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: e080770d-9486-5b18-a9ad-9ff0f93cd183
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column observations
+		dataType: int64
+		formatString: #,0
+		lineageTag: 40080f19-4c36-529f-b28a-584a3c4e68be
+		summarizeBy: sum
+		sourceColumn: observations
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: c9e424ba-74aa-556c-85cd-299bc796f938
+		summarizeBy: sum
+		sourceColumn: avg_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_speed
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 100c54f4-dfc0-585b-9931-6c5ea6a82c10
+		summarizeBy: sum
+		sourceColumn: avg_speed
+
+		annotation SummarizationSetBy = Automatic
+
+	column incidents
+		dataType: int64
+		formatString: #,0
+		lineageTag: c47dd1fc-1a69-504f-af16-bc20d40e8087
+		summarizeBy: sum
+		sourceColumn: incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_congested_hours
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 74facedd-487f-5f12-a432-e77ee374429a
+		summarizeBy: sum
+		sourceColumn: pct_congested_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_zone_month = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "agg_zone_month.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"zone", type text}, {"year", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"observations", Int64.Type}, {"avg_congestion", type number}, {"avg_speed", type number}, {"incidents", Int64.Type}, {"pct_congested_hours", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,87 @@
+table agg_segment_daily
+	isHidden
+	lineageTag: e4d2ae57-b288-5312-969a-e19855361b41
+
+	column segment_id
+		dataType: string
+		lineageTag: b83ee733-a047-578a-bc1d-eb31e1a28877
+		summarizeBy: none
+		sourceColumn: segment_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column zone
+		dataType: string
+		lineageTag: be80743d-bcc9-5b73-886c-0336bc9f2477
+		summarizeBy: none
+		sourceColumn: zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column road_type
+		dataType: string
+		lineageTag: 9963c9ba-2917-53d8-ac56-b1b9eccc6938
+		summarizeBy: none
+		sourceColumn: road_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: ca9d7eb1-a7d4-5322-8d18-d5d2c7604285
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: eadb5ba3-07ef-5114-ace8-ee42112298fc
+		summarizeBy: sum
+		sourceColumn: avg_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column peak_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 5f2f7eb9-2afb-5417-b4e5-7bd412f8141d
+		summarizeBy: sum
+		sourceColumn: peak_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column incidents
+		dataType: int64
+		formatString: #,0
+		lineageTag: 05a7dc09-d183-5555-a0f8-fa1efa9101a0
+		summarizeBy: sum
+		sourceColumn: incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column vehicle_km
+		dataType: double
+		formatString: #,0.000
+		lineageTag: a66cd59e-b272-5b8f-a59f-af8705a27c5e
+		summarizeBy: sum
+		sourceColumn: vehicle_km
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_segment_daily = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "agg_segment_daily.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"segment_id", type text}, {"zone", type text}, {"road_type", type text}, {"date", type date}, {"avg_congestion", type number}, {"peak_congestion", type number}, {"incidents", Int64.Type}, {"vehicle_km", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

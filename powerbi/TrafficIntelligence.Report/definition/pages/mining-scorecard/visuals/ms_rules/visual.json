@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "a020be2b-5e21-544d-a73c-f8ecad0a9a66",
+  "position": {
+    "x": 20,
+    "y": 476,
+    "z": 2,
+    "width": 840,
+    "height": 224,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_association_rules"
+                    }
+                  },
+                  "Property": "antecedent"
+                }
+              },
+              "queryRef": "mining_association_rules.antecedent",
+              "nativeQueryRef": "antecedent"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_association_rules"
+                    }
+                  },
+                  "Property": "consequent"
+                }
+              },
+              "queryRef": "mining_association_rules.consequent",
+              "nativeQueryRef": "consequent"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_association_rules"
+                    }
+                  },
+                  "Property": "support"
+                }
+              },
+              "queryRef": "mining_association_rules.support",
+              "nativeQueryRef": "support"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_association_rules"
+                    }
+                  },
+                  "Property": "confidence"
+                }
+              },
+              "queryRef": "mining_association_rules.confidence",
+              "nativeQueryRef": "confidence"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_association_rules"
+                    }
+                  },
+                  "Property": "lift"
+                }
+              },
+              "queryRef": "mining_association_rules.lift",
+              "nativeQueryRef": "lift"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Association rules'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 import pytest
+from pathlib import Path
 
 from src.mining.association import apriori, build_transactions, generate_rules
 from src.mining.clustering import build_segment_profiles
@@ -148,3 +149,113 @@ def test_supervised_frame_has_no_future_leakage():
     row = sup.iloc[10]
     original = series.set_index("timestamp")["congestion_index"]
     assert row["lag_1"] == pytest.approx(original.loc[row["timestamp"] - pd.Timedelta(hours=1)])
+
+
+# --------------------------------------------------------------- Power BI export
+def test_dim_date_is_contiguous_and_unique():
+    """Power BI can only mark a date table whose dates are unique and gap-free."""
+    from src.export_bi import build_dim_date
+
+    hourly = pd.DataFrame({
+        "date": pd.date_range("2024-01-01", periods=72, freq="h").strftime("%Y-%m-%d")
+    })
+    # Punch a hole: the source skips a day, dim_date must still be contiguous.
+    hourly = hourly[hourly["date"] != "2024-01-02"]
+
+    dim = build_dim_date(hourly)
+    dates = pd.to_datetime(dim["date"])
+
+    assert dim["date_key"].is_unique
+    assert dates.is_unique
+    assert (dates.diff().dropna() == pd.Timedelta(days=1)).all()
+    assert dim.loc[dim["date"] == "2024-01-06", "day_name"].eq("Saturday").all()
+    assert dim.loc[dim["date"] == "2024-01-06", "is_weekend"].eq(1).all()
+
+
+def test_model_metrics_export_is_tall(tmp_path):
+    """Every mining task flattens into (task, model, metric, value) rows."""
+    import json
+
+    from src.export_bi import export_model_metrics
+
+    (tmp_path / "classification_results.json").write_text(json.dumps(
+        {"models": {"decision_tree": {"test_accuracy": 0.71, "macro_f1": 0.73}}}))
+    (tmp_path / "forecasting_results.json").write_text(json.dumps(
+        {"metrics": {"random_forest": {"mae": 0.02, "r2": 0.97}}}))
+    (tmp_path / "association_results.json").write_text(json.dumps({"n_rules": 406}))
+
+    rows = export_model_metrics(tmp_path, tmp_path)
+    frame = pd.read_csv(tmp_path / "mining_model_metrics.csv", encoding="utf-8-sig")
+
+    assert rows == len(frame) == 5
+    assert list(frame.columns) == ["task", "model", "metric", "value"]
+    assert set(frame["task"]) == {"Classification", "Forecasting", "Association rules"}
+    accuracy = frame.query("model == 'decision_tree' and metric == 'test_accuracy'")
+    assert accuracy["value"].iloc[0] == pytest.approx(0.71)
+
+
+def test_export_refuses_a_missing_warehouse(tmp_path):
+    from src.export_bi import export_warehouse
+
+    with pytest.raises(FileNotFoundError, match="run_pipeline"):
+        export_warehouse(tmp_path / "absent.db", tmp_path)
+
+
+# ------------------------------------------------------------- Power BI project
+def test_every_measure_references_a_real_column():
+    """A typo in a DAX measure only surfaces on refresh — catch it here instead."""
+    import re
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "powerbi"))
+    import build_pbip
+
+    columns = _exported_columns()
+    defined = {name for name, _, _, _ in build_pbip.MEASURES}
+
+    for name, dax, _, _ in build_pbip.MEASURES:
+        for table, column in re.findall(r"(\w+)\[([^\]]+)\]", dax):
+            assert table in columns, f"measure {name!r} reads unknown table {table!r}"
+            assert column in columns[table], \
+                f"measure {name!r} reads {table!r} column {column!r}, which does not exist"
+        # A bare [Name] reference is a call to another measure.
+        for referenced in re.findall(r"(?<![\w\]])\[([^\]]+)\]", dax):
+            assert referenced in defined, \
+                f"measure {name!r} calls undefined measure [{referenced}]"
+
+
+def _exported_columns() -> dict[str, set[str]]:
+    """table -> column names, read from the folder `src.export_bi` writes."""
+    data = Path(__file__).resolve().parents[1] / "powerbi" / "data"
+    csvs = sorted(data.glob("*.csv")) if data.exists() else []
+    if not csvs:
+        pytest.skip("run `python -m src.export_bi` to enable the Power BI checks")
+    return {path.stem: set(pd.read_csv(path, nrows=1, encoding="utf-8-sig").columns)
+            for path in csvs}
+
+
+def test_report_visuals_only_bind_to_modelled_fields():
+    """Guards the report against drifting away from the semantic model."""
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "powerbi"))
+    import build_pbip
+
+    measures = {name for name, _, _, _ in build_pbip.MEASURES}
+    columns = _exported_columns()
+
+    seen = set()
+    for page_id, _, visuals in build_pbip.build_pages():
+        for spec in visuals:
+            assert (page_id, spec["slug"]) not in seen, "duplicate visual id"
+            seen.add((page_id, spec["slug"]))
+            for role in spec["visual"].get("query", {}).get("queryState", {}).values():
+                for proj in role["projections"]:
+                    field = proj["field"]
+                    if "Measure" in field:
+                        assert field["Measure"]["Property"] in measures
+                    else:
+                        entity = field["Column"]["Expression"]["SourceRef"]["Entity"]
+                        prop = field["Column"]["Property"]
+                        assert entity in columns, f"unknown table {entity}"
+                        assert prop in columns[entity], f"{entity} has no column {prop}"

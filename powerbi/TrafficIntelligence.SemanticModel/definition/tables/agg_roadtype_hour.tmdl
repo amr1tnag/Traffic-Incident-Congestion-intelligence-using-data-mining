@@ -1,0 +1,69 @@
+table agg_roadtype_hour
+	isHidden
+	lineageTag: 38577dcf-cf31-5b9c-86e5-0e4c7d5c4d1c
+
+	column road_type
+		dataType: string
+		lineageTag: 3fd66196-d095-566d-adb0-c0b81688ffe0
+		summarizeBy: none
+		sourceColumn: road_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour
+		dataType: int64
+		lineageTag: d85c6042-9b6a-5181-82f5-6727366d41c3
+		summarizeBy: none
+		sourceColumn: hour
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_weekend
+		dataType: int64
+		lineageTag: 765051bc-018e-57d9-b94f-40b4f8e2ae38
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_congestion
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 8f2e89c2-041d-56e2-bf3f-7e81886c2d9f
+		summarizeBy: sum
+		sourceColumn: avg_congestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_delay_index
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 9b7ec379-8b74-5be6-a319-4d9a19677af2
+		summarizeBy: sum
+		sourceColumn: avg_delay_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column observations
+		dataType: int64
+		formatString: #,0
+		lineageTag: f1be77f8-6190-5103-b67e-ce46feaaa6c1
+		summarizeBy: sum
+		sourceColumn: observations
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_roadtype_hour = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "agg_roadtype_hour.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"road_type", type text}, {"hour", Int64.Type}, {"is_weekend", Int64.Type}, {"avg_congestion", type number}, {"avg_delay_index", type number}, {"observations", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "c17de2ff-ac67-5bd3-b3c9-3c2128cfaf90",
+  "position": {
+    "x": 20,
+    "y": 462,
+    "z": 7,
+    "width": 400,
+    "height": 238,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "zone"
+                }
+              },
+              "queryRef": "mining_anomalies.zone",
+              "nativeQueryRef": "zone"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Agreed Anomalies"
+                }
+              },
+              "queryRef": "_Measures.Agreed Anomalies",
+              "nativeQueryRef": "Agreed Anomalies"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Agreed anomalies by zone'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

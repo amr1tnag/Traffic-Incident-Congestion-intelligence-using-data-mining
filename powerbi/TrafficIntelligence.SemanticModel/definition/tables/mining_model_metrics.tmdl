@@ -1,0 +1,50 @@
+table mining_model_metrics
+	lineageTag: 200fb459-1457-53a1-8bd8-3d91e843030a
+
+	column task
+		dataType: string
+		lineageTag: 16c36d2d-4aea-530d-b8e9-3b877324e289
+		summarizeBy: none
+		sourceColumn: task
+
+		annotation SummarizationSetBy = Automatic
+
+	column model
+		dataType: string
+		lineageTag: 5ab86a7d-99dd-56cf-9a0f-27d6782637b6
+		summarizeBy: none
+		sourceColumn: model
+
+		annotation SummarizationSetBy = Automatic
+
+	column metric
+		dataType: string
+		lineageTag: 6976685c-4aa8-523b-a40b-986b8cfbb9cd
+		summarizeBy: none
+		sourceColumn: metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 71c680d6-6d07-53d9-849b-28ec564dc8cc
+		summarizeBy: sum
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mining_model_metrics = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "mining_model_metrics.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"task", type text}, {"model", type text}, {"metric", type text}, {"value", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

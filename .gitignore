@@ -12,3 +12,7 @@ data/warehouse/*.db
 
 # Everything under reports/ IS tracked: it is the evidence of a pipeline run
 # (findings.md, figures, OLAP query results, per-task metrics JSON).
+
+# The Power BI CSV extract is derived from the warehouse (≈50 MB) — regenerate
+# it with `python -m src.export_bi`.  The PBIP project itself IS tracked.
+powerbi/data/

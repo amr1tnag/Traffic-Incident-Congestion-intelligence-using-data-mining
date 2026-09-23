@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "e0678511-daa0-5b36-b00e-7467e137c2e1",
+  "position": {
+    "x": 1076,
+    "y": 462,
+    "z": 9,
+    "width": 184,
+    "height": 238,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "slicer",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "zone"
+                }
+              },
+              "queryRef": "mining_anomalies.zone",
+              "nativeQueryRef": "zone"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Zone'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

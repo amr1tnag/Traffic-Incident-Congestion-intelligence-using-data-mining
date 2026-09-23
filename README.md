@@ -8,6 +8,9 @@ traffic authority actually asks.
 ```
  raw feeds ──▶ preprocessing ──▶ star-schema DW ──▶ OLAP cube ──▶ mining ──▶ report
  (3 sources)   (KDD cleaning)     (SQLite)          (5 ops)       (5 tasks)   (md + figures)
+                                        │
+                                        └──▶ CSV extract ──▶ Power BI (PBIP)
+                                             (15 tables)      (6 pages)
 ```
 
 ## Questions the project answers
@@ -40,6 +43,19 @@ Outputs land in `reports/`:
 | `reports/*_results.json` | machine-readable metrics for each mining task |
 | `data/warehouse/traffic_dw.db` | the loaded star-schema warehouse (queryable with any SQLite client) |
 
+### Power BI
+
+```bash
+python run_pipeline.py --stages export   # refresh powerbi/data/ from the warehouse
+python powerbi/build_pbip.py             # (re)generate the .pbip project
+```
+
+Open `powerbi/TrafficIntelligence.pbip` in Power BI Desktop and Refresh. The
+model reuses the warehouse star schema unchanged — 16 tables, 35 DAX measures,
+six report pages covering the overview, an interactive OLAP explorer, incidents,
+hotspots, forecasts and a mining scorecard. Full notes in
+[`docs/powerbi.md`](docs/powerbi.md).
+
 Useful variations:
 
 ```bash
@@ -52,7 +68,7 @@ python -m src.olap                                 # just the cube operations
 
 ```
 config.yaml                 all tunable parameters in one place
-run_pipeline.py             end-to-end driver (7 stages)
+run_pipeline.py             end-to-end driver (8 stages)
 src/
   generate_data.py          stage 1 — raw source feeds (+ injected data-quality defects)
   preprocess.py             stage 2 — cleaning, integration, transformation, discretisation
@@ -67,8 +83,14 @@ src/
     anomaly.py              outlier detection
   visualize.py              stage 6 — figures
   report.py                 stage 7 — findings.md
+  export_bi.py              stage 8 — CSV extract for Power BI
+powerbi/
+  build_pbip.py             generates the Power BI project from the extract
+  TrafficIntelligence.pbip  open this in Power BI Desktop
+  *.SemanticModel/          TMDL model: tables, relationships, 35 DAX measures
+  *.Report/                 PBIR report: 6 pages
 tests/test_pipeline.py      unit tests for cleaning, Apriori, feature building
-docs/                       architecture notes and the report outline
+docs/                       architecture notes, report outline, Power BI guide
 ```
 
 ## The data

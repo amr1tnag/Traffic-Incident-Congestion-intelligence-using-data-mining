@@ -1,0 +1,53 @@
+table mining_forecast
+	lineageTag: 6abc5cdf-5681-50c9-9add-825b6e8eac2a
+
+	column timestamp
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 384f60bf-b7f6-557d-85d3-9f673bf10842
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 2a756356-3d9a-5d47-b4b7-255e1e39bdef
+		summarizeBy: sum
+		sourceColumn: actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column predicted
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 2c29fa89-729a-5337-ba36-ecc3823eb699
+		summarizeBy: sum
+		sourceColumn: predicted
+
+		annotation SummarizationSetBy = Automatic
+
+	column persistence
+		dataType: double
+		formatString: #,0.000
+		lineageTag: ce4db34f-c841-521c-b677-834e2a866982
+		summarizeBy: sum
+		sourceColumn: persistence
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mining_forecast = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "mining_forecast.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"timestamp", type datetime}, {"actual", type number}, {"predicted", type number}, {"persistence", type number}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

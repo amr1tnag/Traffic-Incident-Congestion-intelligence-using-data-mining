@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "b71218d2-07a4-5713-8cae-ef33fc009731",
+  "position": {
+    "x": 20,
+    "y": 64,
+    "z": 1,
+    "width": 840,
+    "height": 400,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_model_metrics"
+                    }
+                  },
+                  "Property": "task"
+                }
+              },
+              "queryRef": "mining_model_metrics.task",
+              "nativeQueryRef": "task"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_model_metrics"
+                    }
+                  },
+                  "Property": "model"
+                }
+              },
+              "queryRef": "mining_model_metrics.model",
+              "nativeQueryRef": "model"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_model_metrics"
+                    }
+                  },
+                  "Property": "metric"
+                }
+              },
+              "queryRef": "mining_model_metrics.metric",
+              "nativeQueryRef": "metric"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_model_metrics"
+                    }
+                  },
+                  "Property": "value"
+                }
+              },
+              "queryRef": "mining_model_metrics.value",
+              "nativeQueryRef": "value"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Every model, every metric'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

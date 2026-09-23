@@ -1,0 +1,221 @@
+table _Measures
+	lineageTag: a46e2410-3207-5b55-8fc6-a927d9718dc1
+
+	/// Segment-hours in the current filter context.
+	measure Observations = COUNTROWS(fact_traffic)
+		formatString: #,0
+		lineageTag: 434339f4-e356-5e84-948f-2fffcfb2d63e
+
+	/// Mean congestion index (0 = free flow, 1 = gridlock).
+	measure 'Avg Congestion' = AVERAGE(fact_traffic[congestion_index])
+		formatString: 0.000
+		lineageTag: c0211f81-ca96-5e8a-ab2c-d988bf19f31a
+
+	/// Worst congestion index observed.
+	measure 'Peak Congestion' = MAX(fact_traffic[congestion_index])
+		formatString: 0.000
+		lineageTag: 50231f7d-8280-52b2-b693-0dc37b7779b8
+
+	/// Mean observed speed in km/h.
+	measure 'Avg Speed' = AVERAGE(fact_traffic[avg_speed_kmph])
+		formatString: #,0.0
+		lineageTag: 9117783d-eee2-52f9-8d81-734dae3a7552
+
+	/// Observed speed as a fraction of the posted limit.
+	measure 'Avg Speed Ratio' = AVERAGE(fact_traffic[speed_ratio])
+		formatString: 0.000
+		lineageTag: e7494ee1-36c5-5f87-9f3c-8b6b09d0ebb1
+
+	/// Mean segment traversal time in minutes.
+	measure 'Avg Travel Time' = AVERAGE(fact_traffic[travel_time_min])
+		formatString: #,0.0
+		lineageTag: 28d93f10-9e4a-5871-a603-f23c6e50c810
+
+	/// Excess travel time relative to free-flow conditions.
+	measure 'Avg Delay Index' = AVERAGE(fact_traffic[delay_index])
+		formatString: 0.000
+		lineageTag: 8bda71f5-ad4b-5d29-8a27-620bb45c511b
+
+	/// Total vehicle-kilometres travelled.
+	measure 'Vehicle KM' = SUM(fact_traffic[vehicle_km])
+		formatString: #,0
+		lineageTag: 201e7e64-02d5-5cba-a8ab-84391cb9d79a
+
+	/// Segment-hours classified as congested.
+	measure 'Congested Hours' = CALCULATE(COUNTROWS(fact_traffic), fact_traffic[is_congested] = 1)
+		formatString: #,0
+		lineageTag: bd31671a-4c88-575f-aea1-7c56dd4aecdf
+
+	/// Share of segment-hours that were congested.
+	measure 'Congested Hours %' = DIVIDE([Congested Hours], [Observations])
+		formatString: 0.0%
+		lineageTag: b4298107-691a-5365-bb14-a24b170cb93a
+
+	/// Reported incidents in the current filter context.
+	measure Incidents = COUNTROWS(fact_incident)
+		formatString: #,0
+		lineageTag: 70d848c6-71dd-5d36-b239-ecce16911513
+
+	/// Incidents flagged as major (severity 3-4).
+	measure 'Major Incidents' = CALCULATE(COUNTROWS(fact_incident), fact_incident[is_major] = 1)
+		formatString: #,0
+		lineageTag: 8d253db0-e953-5169-9b35-9820ec7079dd
+
+	/// Share of incidents that were major.
+	measure 'Major Incident %' = DIVIDE([Major Incidents], [Incidents])
+		formatString: 0.0%
+		lineageTag: ed652657-1f9b-5aa3-8692-7e2c66df8e2e
+
+	/// Mean reported severity, 1 (minor) to 4 (critical).
+	measure 'Avg Severity' = AVERAGE(fact_incident[severity])
+		formatString: 0.00
+		lineageTag: 6dd25f03-1913-5ce8-9ee8-b6010342848e
+
+	/// Mean minutes from report to first response.
+	measure 'Avg Response Time' = AVERAGE(fact_incident[response_time_min])
+		formatString: #,0.0
+		lineageTag: 6d7e692e-58f5-5a01-ac78-9adab07f3c20
+
+	/// Mean incident clearance time in minutes.
+	measure 'Avg Incident Duration' = AVERAGE(fact_incident[duration_min])
+		formatString: #,0.0
+		lineageTag: d645338a-8c9a-538b-b572-437f61eb5d23
+
+	/// Total casualties recorded.
+	measure Casualties = SUM(fact_incident[casualties])
+		formatString: #,0
+		lineageTag: 6a1c3698-f535-5129-abe5-391e750c33d6
+
+	/// Incident rate normalised for network exposure.
+	measure 'Incidents per 1k Segment-Hours' = DIVIDE([Incidents], [Observations]) * 1000
+		formatString: #,0.00
+		lineageTag: 4a074a3f-b614-5289-9f74-57b23e220f84
+
+	/// Average congestion in the previous month.
+	measure 'Avg Congestion PM' = CALCULATE([Avg Congestion], DATEADD(dim_date[date], -1, MONTH))
+		formatString: 0.000
+		lineageTag: d791b26e-9ba4-5592-95d0-eb4705145cf2
+
+	/// Month-on-month change in average congestion.
+	measure 'Congestion MoM %' =
+				```
+				VAR Prev = [Avg Congestion PM]
+				RETURN DIVIDE([Avg Congestion] - Prev, Prev)
+				```
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 7f10ce22-1b01-5af2-9c41-98f27e796ab7
+
+	/// Incidents in the previous month.
+	measure 'Incidents PM' = CALCULATE([Incidents], DATEADD(dim_date[date], -1, MONTH))
+		formatString: #,0
+		lineageTag: dbd8140d-011e-5c25-88d5-97d21f8bd51e
+
+	/// Month-on-month change in incident count.
+	measure 'Incidents MoM %' =
+				```
+				VAR Prev = [Incidents PM]
+				RETURN DIVIDE([Incidents] - Prev, Prev)
+				```
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 16e91754-47b6-5295-afb5-e8a6b6540611
+
+	/// Seven-day rolling mean congestion.
+	measure 'Avg Congestion 7d' =
+				```
+				AVERAGEX(
+				    DATESINPERIOD(dim_date[date], MAX(dim_date[date]), -7, DAY),
+				    [Avg Congestion]
+				)
+				```
+		formatString: 0.000
+		lineageTag: 7d0ac7a3-f7a6-5075-8b57-ec29b7ec6b67
+
+	/// Average congestion while weather is adverse.
+	measure 'Avg Congestion Adverse Weather' = CALCULATE([Avg Congestion], dim_weather[is_adverse] = 1)
+		formatString: 0.000
+		lineageTag: c2b1f485-b2e6-5aa8-8e4d-258b85ec70e9
+
+	/// Extra congestion attributable to adverse weather.
+	measure 'Wet Weather Penalty' =
+				```
+				VAR Clear = CALCULATE([Avg Congestion], dim_weather[is_adverse] = 0)
+				VAR Adverse = CALCULATE([Avg Congestion], dim_weather[is_adverse] = 1)
+				RETURN Adverse - Clear
+				```
+		formatString: +0.000;-0.000;0.000
+		lineageTag: 93629624-4f84-5634-bd68-c487ab8327cc
+
+	/// How much worse the peak is than the off-peak.
+	measure 'Peak vs Offpeak Ratio' =
+				```
+				VAR Peak = CALCULATE([Avg Congestion], dim_time[is_peak_hour] = 1)
+				VAR Offpeak = CALCULATE([Avg Congestion], dim_time[is_peak_hour] = 0)
+				RETURN DIVIDE(Peak, Offpeak)
+				```
+		formatString: #,0.00
+		lineageTag: ad2a93af-3d35-5b86-8704-aa22d2ea8f7e
+
+	/// Hours flagged by the anomaly ensemble.
+	measure Anomalies = COUNTROWS(mining_anomalies)
+		formatString: #,0
+		lineageTag: 93c86584-67eb-568a-a29c-e8d00d4dfb18
+
+	/// Hours flagged by both Isolation Forest and the seasonal z-score.
+	measure 'Agreed Anomalies' = CALCULATE(COUNTROWS(mining_anomalies), mining_anomalies[anomaly_agreement] = 1)
+		formatString: #,0
+		lineageTag: 87ded534-ee5e-5876-a02e-97578c4fc19c
+
+	/// Agreed anomalies with no logged incident - candidate unreported events.
+	measure 'Unexplained Anomalies' =
+				```
+				CALCULATE(
+				    COUNTROWS(mining_anomalies),
+				    mining_anomalies[anomaly_agreement] = 1,
+				    mining_anomalies[incident_count] = 0
+				)
+				```
+		formatString: #,0
+		lineageTag: 09a829f5-3b95-5601-84e5-919ec779fc04
+
+	/// Mean absolute error of the congestion forecast.
+	measure 'Forecast MAE' = AVERAGEX(mining_forecast, ABS(mining_forecast[actual] - mining_forecast[predicted]))
+		formatString: 0.0000
+		lineageTag: 84d2d0a9-17bf-580c-8226-5b787bbbc1d4
+
+	/// Mean absolute error of the naive persistence baseline.
+	measure 'Persistence MAE' = AVERAGEX(mining_forecast, ABS(mining_forecast[actual] - mining_forecast[persistence]))
+		formatString: 0.0000
+		lineageTag: bc5ff419-6bdd-5c7c-a5bd-3294bdc4ca6f
+
+	/// How much the model beats the naive baseline.
+	measure 'Forecast Lift vs Persistence %' = DIVIDE([Persistence MAE] - [Forecast MAE], [Persistence MAE])
+		formatString: 0.0%
+		lineageTag: c6807a38-09b5-5df6-90e2-dca5e19ec256
+
+	/// Association rules passing the support/confidence/lift thresholds.
+	measure Rules = COUNTROWS(mining_association_rules)
+		formatString: #,0
+		lineageTag: 1894a186-8df0-5087-9f12-17898cf6d57b
+
+	/// Strongest lift among the selected rules.
+	measure 'Max Lift' = MAX(mining_association_rules[lift])
+		formatString: #,0.00
+		lineageTag: c49b8ada-1730-5ceb-9d8e-4c7914c229bf
+
+	/// Road segments assigned to a congestion-profile cluster.
+	measure 'Segments Clustered' = COUNTROWS(mining_segment_clusters)
+		formatString: #,0
+		lineageTag: ed8af4c9-577a-501e-9310-c822cd54fa07
+
+	column Value
+		dataType: int64
+		isHidden
+		lineageTag: 46587cb7-6217-514e-9bbd-8f6563b1847b
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = {1}

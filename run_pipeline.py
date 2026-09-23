@@ -4,8 +4,9 @@
     python run_pipeline.py                 # full run
     python run_pipeline.py --skip-generate # reuse existing data/raw
     python run_pipeline.py --stages preprocess etl olap mine report
+    python run_pipeline.py --stages export     # refresh the Power BI extract only
 
-Stages: generate -> preprocess -> etl -> olap -> mine -> visualize -> report
+Stages: generate -> preprocess -> etl -> olap -> mine -> visualize -> report -> export
 """
 
 from __future__ import annotations
@@ -16,11 +17,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from src import etl, generate_data, olap, preprocess, report, visualize
+from src import etl, export_bi, generate_data, olap, preprocess, report, visualize
 from src.config import load_config
 from src.mining import anomaly, association, classification, clustering, forecasting
 
-STAGES = ["generate", "preprocess", "etl", "olap", "mine", "visualize", "report"]
+STAGES = ["generate", "preprocess", "etl", "olap", "mine", "visualize", "report",
+          "export"]
 
 
 def _banner(text: str) -> None:
@@ -43,20 +45,20 @@ def main() -> None:
     started = time.time()
 
     if "generate" in stages:
-        _banner("STAGE 1/7  Generate raw data sources")
+        _banner("STAGE 1/8  Generate raw data sources")
         generate_data.main(args.config)
 
     if "preprocess" in stages:
-        _banner("STAGE 2/7  Clean, integrate and transform")
+        _banner("STAGE 2/8  Clean, integrate and transform")
         preprocess.main(args.config)
 
     if "etl" in stages:
-        _banner("STAGE 3/7  Load the star-schema warehouse")
+        _banner("STAGE 3/8  Load the star-schema warehouse")
         etl.main(args.config)
 
     olap_results: dict = {}
     if "olap" in stages:
-        _banner("STAGE 4/7  OLAP cube operations")
+        _banner("STAGE 4/8  OLAP cube operations")
         olap_results = olap.run_all(args.config)
 
     mining: dict = {}
@@ -66,7 +68,7 @@ def main() -> None:
         incident_features = pd.read_csv(proc / "incident_features.csv")
 
     if "mine" in stages:
-        _banner("STAGE 5/7  Data mining")
+        _banner("STAGE 5/8  Data mining")
         print("\n-- Classification: incident severity --")
         mining["classification"] = classification.run(incident_features, cfg)
         classification.save(mining["classification"], reports_dir)
@@ -88,13 +90,17 @@ def main() -> None:
         anomaly.save(mining["anomaly"], reports_dir)
 
     if "visualize" in stages and mining:
-        _banner("STAGE 6/7  Figures")
+        _banner("STAGE 6/8  Figures")
         visualize.generate_all(base, incident_features, mining,
                                Path(cfg["reports"]["figures_dir"]))
 
     if "report" in stages and mining and olap_results:
-        _banner("STAGE 7/7  Findings report")
+        _banner("STAGE 7/8  Findings report")
         report.build(cfg, base, incident_features, olap_results, mining)
+
+    if "export" in stages:
+        _banner("STAGE 8/8  Power BI extract")
+        export_bi.main(args.config)
 
     print(f"\nPipeline finished in {time.time() - started:.1f}s. "
           f"Outputs in {reports_dir.relative_to(Path.cwd()) if reports_dir.is_relative_to(Path.cwd()) else reports_dir}/")

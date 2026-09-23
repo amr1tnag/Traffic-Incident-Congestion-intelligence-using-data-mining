@@ -1,0 +1,8 @@
+/// Absolute path to the folder written by `python -m src.export_bi`.
+/// Change this one value after cloning, then Refresh.
+expression DataFolder = "/home/user/Traffic-Incident-Congestion-intelligence-using-data-mining/powerbi/data/" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 4cf84047-208d-5d0b-8430-8b0a31989fb5
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "7e6ed447-6309-59a8-8771-9de0905ad45b",
+  "position": {
+    "x": 660,
+    "y": 456,
+    "z": 4,
+    "width": 400,
+    "height": 244,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "cluster_label"
+                }
+              },
+              "queryRef": "mining_segment_clusters.cluster_label",
+              "nativeQueryRef": "cluster_label"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Segments Clustered"
+                }
+              },
+              "queryRef": "_Measures.Segments Clustered",
+              "nativeQueryRef": "Segments Clustered"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segments per cluster'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

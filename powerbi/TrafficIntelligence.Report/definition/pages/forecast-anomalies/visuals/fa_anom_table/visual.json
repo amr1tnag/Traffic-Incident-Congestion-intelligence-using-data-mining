@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "1aba4aa2-b11c-5b91-a407-a88046df5aa9",
+  "position": {
+    "x": 440,
+    "y": 462,
+    "z": 8,
+    "width": 620,
+    "height": 238,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "segment_id"
+                }
+              },
+              "queryRef": "mining_anomalies.segment_id",
+              "nativeQueryRef": "segment_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "timestamp"
+                }
+              },
+              "queryRef": "mining_anomalies.timestamp",
+              "nativeQueryRef": "timestamp"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "congestion_index"
+                }
+              },
+              "queryRef": "mining_anomalies.congestion_index",
+              "nativeQueryRef": "congestion_index"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "seasonal_z"
+                }
+              },
+              "queryRef": "mining_anomalies.seasonal_z",
+              "nativeQueryRef": "seasonal_z"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_anomalies"
+                    }
+                  },
+                  "Property": "incident_count"
+                }
+              },
+              "queryRef": "mining_anomalies.incident_count",
+              "nativeQueryRef": "incident_count"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Flagged hours'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

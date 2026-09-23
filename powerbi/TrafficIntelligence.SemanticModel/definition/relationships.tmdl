@@ -1,0 +1,39 @@
+relationship dim_date_dim_time
+	fromColumn: dim_time.date_key
+	toColumn: dim_date.date_key
+
+relationship dim_time_fact_traffic
+	fromColumn: fact_traffic.time_key
+	toColumn: dim_time.time_key
+
+relationship dim_segment_fact_traffic
+	fromColumn: fact_traffic.segment_key
+	toColumn: dim_segment.segment_key
+
+relationship dim_weather_fact_traffic
+	fromColumn: fact_traffic.weather_key
+	toColumn: dim_weather.weather_key
+
+relationship dim_time_fact_incident
+	fromColumn: fact_incident.time_key
+	toColumn: dim_time.time_key
+
+relationship dim_segment_fact_incident
+	fromColumn: fact_incident.segment_key
+	toColumn: dim_segment.segment_key
+
+relationship dim_weather_fact_incident
+	fromColumn: fact_incident.weather_key
+	toColumn: dim_weather.weather_key
+
+relationship dim_type_fact_incident
+	fromColumn: fact_incident.incident_type_key
+	toColumn: dim_incident_type.incident_type_key
+
+relationship segment_clusters
+	fromColumn: mining_segment_clusters.segment_id
+	toColumn: dim_segment.segment_id
+
+relationship anomalies_segment
+	fromColumn: mining_anomalies.segment_id
+	toColumn: dim_segment.segment_id

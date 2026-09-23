@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "6c3be6bb-3d65-5024-a413-149e779b7e8e",
+  "position": {
+    "x": 660,
+    "y": 64,
+    "z": 2,
+    "width": 600,
+    "height": 380,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "segment_id"
+                }
+              },
+              "queryRef": "mining_segment_clusters.segment_id",
+              "nativeQueryRef": "segment_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "cluster_label"
+                }
+              },
+              "queryRef": "mining_segment_clusters.cluster_label",
+              "nativeQueryRef": "cluster_label"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "avg_congestion"
+                }
+              },
+              "queryRef": "mining_segment_clusters.avg_congestion",
+              "nativeQueryRef": "avg_congestion"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "pct_congested_hours"
+                }
+              },
+              "queryRef": "mining_segment_clusters.pct_congested_hours",
+              "nativeQueryRef": "pct_congested_hours"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "peak_offpeak_ratio"
+                }
+              },
+              "queryRef": "mining_segment_clusters.peak_offpeak_ratio",
+              "nativeQueryRef": "peak_offpeak_ratio"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mining_segment_clusters"
+                    }
+                  },
+                  "Property": "incident_rate_per_1k_h"
+                }
+              },
+              "queryRef": "mining_segment_clusters.incident_rate_per_1k_h",
+              "nativeQueryRef": "incident_rate_per_1k_h"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cluster assignment per segment'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

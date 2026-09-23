@@ -1,0 +1,140 @@
+table fact_incident
+	lineageTag: 87e9d34f-3d6d-563d-a055-f9faf3e47ebc
+
+	column incident_key
+		dataType: int64
+		isHidden
+		lineageTag: 238ed2d7-287c-5550-aed1-bc9fbc654486
+		summarizeBy: none
+		sourceColumn: incident_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_id
+		dataType: string
+		lineageTag: 7d862dc8-7798-5963-a5d9-47684447d0e9
+		summarizeBy: none
+		sourceColumn: incident_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_key
+		dataType: int64
+		isHidden
+		lineageTag: d1f4f1f5-99cc-5da9-87ad-770c6ab7108c
+		summarizeBy: none
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_key
+		dataType: int64
+		isHidden
+		lineageTag: 15f535ae-3d7e-5920-9976-ee20e69d73da
+		summarizeBy: none
+		sourceColumn: segment_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column weather_key
+		dataType: int64
+		isHidden
+		lineageTag: a0aa64f3-120d-5aa5-b2ae-caba6cfc21ff
+		summarizeBy: none
+		sourceColumn: weather_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_type_key
+		dataType: int64
+		isHidden
+		lineageTag: 03090d30-1642-5445-b19e-b85ef22b14fd
+		summarizeBy: none
+		sourceColumn: incident_type_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column severity
+		dataType: int64
+		lineageTag: f656c5b3-40d1-522d-8307-8c5d15736467
+		summarizeBy: none
+		sourceColumn: severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column vehicles_involved
+		dataType: int64
+		formatString: #,0
+		lineageTag: 8f821569-9977-56ef-8a5b-aa10b01800f1
+		summarizeBy: sum
+		sourceColumn: vehicles_involved
+
+		annotation SummarizationSetBy = Automatic
+
+	column lanes_blocked
+		dataType: int64
+		formatString: #,0
+		lineageTag: 6dd7c2fa-3a25-52ec-9745-213c801f8771
+		summarizeBy: sum
+		sourceColumn: lanes_blocked
+
+		annotation SummarizationSetBy = Automatic
+
+	column casualties
+		dataType: int64
+		formatString: #,0
+		lineageTag: 5e3a9839-08c2-5a62-bbe6-eaf7b3dc57ef
+		summarizeBy: sum
+		sourceColumn: casualties
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_min
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 211d9d7f-88e5-54b5-9185-c3ba112cf173
+		summarizeBy: sum
+		sourceColumn: duration_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column response_time_min
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 334c7e83-e8bd-5cbf-902a-b2c6cf8d55f4
+		summarizeBy: sum
+		sourceColumn: response_time_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column congestion_index
+		dataType: double
+		formatString: #,0.000
+		lineageTag: e0c267ee-69c3-555f-8952-4766bb725cd1
+		summarizeBy: sum
+		sourceColumn: congestion_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_major
+		dataType: int64
+		lineageTag: 46bb3fda-349a-531c-a839-b7924df40e9e
+		summarizeBy: none
+		sourceColumn: is_major
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_incident = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "fact_incident.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"incident_key", Int64.Type}, {"incident_id", type text}, {"time_key", Int64.Type}, {"segment_key", Int64.Type}, {"weather_key", Int64.Type}, {"incident_type_key", Int64.Type}, {"severity", Int64.Type}, {"vehicles_involved", Int64.Type}, {"lanes_blocked", Int64.Type}, {"casualties", Int64.Type}, {"duration_min", type number}, {"response_time_min", type number}, {"congestion_index", type number}, {"is_major", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

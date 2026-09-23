@@ -1,0 +1,159 @@
+table fact_traffic
+	lineageTag: 1814e81a-45c5-50c7-bc91-5d628714efe9
+
+	column traffic_key
+		dataType: int64
+		isHidden
+		lineageTag: 61b11f02-95e1-5094-bee6-2563e88e0335
+		summarizeBy: none
+		sourceColumn: traffic_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_key
+		dataType: int64
+		isHidden
+		lineageTag: 9f5cce65-394f-55a9-b60a-543580ce47f2
+		summarizeBy: none
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_key
+		dataType: int64
+		isHidden
+		lineageTag: e49c7708-7b0d-5ccb-b7e2-3f8c9acbcaa1
+		summarizeBy: none
+		sourceColumn: segment_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column weather_key
+		dataType: int64
+		isHidden
+		lineageTag: 4cc15d80-e622-5c1a-9189-dfe7826e9150
+		summarizeBy: none
+		sourceColumn: weather_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column vehicle_count
+		dataType: double
+		formatString: #,0.000
+		lineageTag: dd16007c-8a14-5177-9dd6-24a5724de4ea
+		summarizeBy: sum
+		sourceColumn: vehicle_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_speed_kmph
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 1d48f820-094e-590b-abad-19c7a02e05c9
+		summarizeBy: sum
+		sourceColumn: avg_speed_kmph
+
+		annotation SummarizationSetBy = Automatic
+
+	column occupancy_pct
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 7ff78f45-7861-5847-abf5-6021e1c8a069
+		summarizeBy: sum
+		sourceColumn: occupancy_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column travel_time_min
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 46a189cc-2c05-599c-84c2-3cd4fa2a1245
+		summarizeBy: sum
+		sourceColumn: travel_time_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column congestion_index
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 8b256510-0dd7-5e6e-bf4d-aa1fc998c1f4
+		summarizeBy: sum
+		sourceColumn: congestion_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column congestion_level
+		dataType: string
+		lineageTag: 8d9151e1-8488-589d-af7f-1edf4d588208
+		summarizeBy: none
+		sourceColumn: congestion_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column speed_ratio
+		dataType: double
+		formatString: #,0.000
+		lineageTag: e45bdf40-9369-5366-b870-a8da11f0a30d
+		summarizeBy: sum
+		sourceColumn: speed_ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column delay_index
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 5afe082a-5420-5930-be60-e6153624123a
+		summarizeBy: sum
+		sourceColumn: delay_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column flow_per_lane
+		dataType: double
+		formatString: #,0.000
+		lineageTag: 1d5dea1e-6fa4-5763-85f1-bfaf7a38e7ea
+		summarizeBy: sum
+		sourceColumn: flow_per_lane
+
+		annotation SummarizationSetBy = Automatic
+
+	column vehicle_km
+		dataType: double
+		formatString: #,0.000
+		lineageTag: cf25e389-17c5-5d5c-8d2e-fcc87dc9232f
+		summarizeBy: sum
+		sourceColumn: vehicle_km
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_count
+		dataType: int64
+		formatString: #,0
+		lineageTag: b1d0a926-a491-5c60-b66e-1c613744b14c
+		summarizeBy: sum
+		sourceColumn: incident_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_congested
+		dataType: int64
+		lineageTag: f06a2396-cc68-5813-88a0-60aac8f91f0d
+		summarizeBy: none
+		sourceColumn: is_congested
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_traffic = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(
+				        File.Contents(DataFolder & "fact_traffic.csv"),
+				        [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]
+				    ),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"traffic_key", Int64.Type}, {"time_key", Int64.Type}, {"segment_key", Int64.Type}, {"weather_key", Int64.Type}, {"vehicle_count", type number}, {"avg_speed_kmph", type number}, {"occupancy_pct", type number}, {"travel_time_min", type number}, {"congestion_index", type number}, {"congestion_level", type text}, {"speed_ratio", type number}, {"delay_index", type number}, {"flow_per_lane", type number}, {"vehicle_km", type number}, {"incident_count", Int64.Type}, {"is_congested", Int64.Type}})
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table

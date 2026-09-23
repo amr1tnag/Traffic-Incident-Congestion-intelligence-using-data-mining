@@ -259,3 +259,49 @@ def test_report_visuals_only_bind_to_modelled_fields():
                         prop = field["Column"]["Property"]
                         assert entity in columns, f"unknown table {entity}"
                         assert prop in columns[entity], f"{entity} has no column {prop}"
+
+
+def test_generated_schema_urls_match_the_fabric_patterns():
+    """Desktop regex-checks every $schema and rejects the project on a mismatch.
+
+    The .pbip entry point is the trap: it sits under fabric/pbip/, while the
+    report's own files sit under fabric/item/report/.
+    """
+    import json
+    import re
+
+    root = Path(__file__).resolve().parents[1] / "powerbi"
+    expected = {
+        "TrafficIntelligence.pbip":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/pbip/"
+            r"pbipProperties/1\.[0-9]+\.[0-9]+/schema\.json$",
+        "definition.pbir":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/item/report/"
+            r"definitionProperties/1\.[0-9]+\.[0-9]+/schema\.json$",
+        "report.json":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/item/report/"
+            r"definition/report/1\.[0-9]+\.[0-9]+/schema\.json$",
+        "page.json":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/item/report/"
+            r"definition/page/1\.[0-9]+\.[0-9]+/schema\.json$",
+        "pages.json":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/item/report/"
+            r"definition/pagesMetadata/1\.[0-9]+\.[0-9]+/schema\.json$",
+        "visual.json":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/item/report/"
+            r"definition/visualContainer/1\.[0-9]+\.[0-9]+/schema\.json$",
+        ".platform":
+            r"^https://developer\.microsoft\.com/json-schemas/fabric/gitIntegration/"
+            r"platformProperties/2\.[0-9]+\.[0-9]+/schema\.json$",
+    }
+
+    checked = 0
+    for name, pattern in expected.items():
+        paths = [p for p in root.rglob(name) if "data" not in p.parts]
+        assert paths, f"{name} was not generated"
+        for path in paths:
+            schema = json.loads(path.read_text(encoding="utf-8")).get("$schema")
+            assert schema, f"{path} has no $schema"
+            assert re.match(pattern, schema), f"{path} has a bad $schema: {schema}"
+            checked += 1
+    assert checked >= 60

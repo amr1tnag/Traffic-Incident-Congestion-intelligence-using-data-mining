@@ -791,6 +791,22 @@ def build_report(root: Path) -> None:
     })
 
 
+def build_pbip_entry(root: Path) -> None:
+    """The .pbip file Power BI Desktop opens.
+
+    Its $schema lives under fabric/pbip/pbipProperties — note that, unlike the
+    report's files, it is NOT under fabric/item/.  Desktop validates the URL
+    against a regex and refuses the whole project if it does not match.
+    """
+    write_json(root / f"{PROJECT}.pbip", {
+        "$schema": "https://developer.microsoft.com/json-schemas/fabric/pbip/"
+                   "pbipProperties/1.0.0/schema.json",
+        "version": "1.0",
+        "artifacts": [{"report": {"path": f"{PROJECT}.Report"}}],
+        "settings": {"enableAutoRecovery": True},
+    })
+
+
 def main(data_dir: Path | str | None = None) -> Path:
     data = Path(data_dir).resolve() if data_dir else (HERE / "data").resolve()
     csvs = sorted(p for p in data.glob("*.csv")
@@ -809,6 +825,7 @@ def main(data_dir: Path | str | None = None) -> Path:
 
     build_semantic_model(HERE, data, tables)
     build_report(HERE)
+    build_pbip_entry(HERE)
 
     print(f"PBIP project written to {HERE}")
     print(f"  semantic model : {len(tables)} tables + {len(MEASURES)} measures "
